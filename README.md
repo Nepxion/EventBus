@@ -112,7 +112,7 @@ public class MyApplication {
 
         for (int i = 0; i < 20; i++) {
             // 异步模式下(默认)，子线程中收到派发的事件
-            eventControllerFactory.getSingletonController().post(new Event("A-" + i));
+            eventControllerFactory.getSharedController().post(new Event("A-" + i));
 
             // 同步模式下，主线程中收到派发的事件
             // 事件派发接口中eventControllerFactory.getController(identifier, async)必须和@EnableEventBus参数保持一致，否则会收不到事件
@@ -120,4 +120,27 @@ public class MyApplication {
         }
     }
 }
+```
+
+线程池配置，参考application.properties
+```java
+# Thread Pool Config
+# Multi thread pool，是否线程隔离，如果是那么每个不同类型的事件都会占用一个单独线程池，否则共享一个线程池
+threadPoolMultiMode=false
+# 共享线程池的名称
+threadPoolSharedName=EventBus
+# 是否显示自定义的线程池名
+threadPoolNameCustomized=true
+# CPU unit
+threadPoolCorePoolSize=4
+# CPU unit
+threadPoolMaximumPoolSize=8
+threadPoolKeepAliveTime=900000
+threadPoolAllowCoreThreadTimeout=false
+# LinkedBlockingQueue, ArrayBlockingQueue, SynchronousQueue
+threadPoolQueue=LinkedBlockingQueue
+# CPU unit (Used for LinkedBlockingQueue or ArrayBlockingQueue)
+threadPoolQueueCapacity=1024
+# BlockingPolicyWithReport, CallerRunsPolicyWithReport, AbortPolicyWithReport, RejectedPolicyWithReport, DiscardedPolicyWithReport
+threadPoolRejectedPolicy=BlockingPolicyWithReport
 ```
