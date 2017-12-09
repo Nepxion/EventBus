@@ -1,4 +1,4 @@
-package com.nepxion.eventbus.core;
+package com.nepxion.eventbus.thread;
 
 /**
  * <p>Title: Nepxion EventBus</p>
@@ -10,13 +10,14 @@ package com.nepxion.eventbus.core;
  * @version 1.0
  */
 
-public enum EventType {
-    SYNC("Sync"),
-    ASYNC("Async");
+public enum ThreadQueueType {
+    LINKED_BLOCKING_QUEUE("LinkedBlockingQueue"),
+    ARRAY_BLOCKING_QUEUE("ArrayBlockingQueue"),
+    SYNCHRONOUS_QUEUE("SynchronousQueue");
 
     private String value;
 
-    private EventType(String value) {
+    private ThreadQueueType(String value) {
         this.value = value;
     }
 
@@ -24,8 +25,8 @@ public enum EventType {
         return value;
     }
 
-    public static EventType fromString(String value) {
-        for (EventType type : EventType.values()) {
+    public static ThreadQueueType fromString(String value) {
+        for (ThreadQueueType type : ThreadQueueType.values()) {
             if (type.getValue().equalsIgnoreCase(value.trim())) {
                 return type;
             }

@@ -10,22 +10,26 @@ package com.nepxion.eventbus.core;
  * @version 1.0
  */
 
-import java.util.concurrent.ConcurrentMap;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.google.common.collect.Maps;
 import com.google.common.eventbus.AsyncEventBus;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.SubscriberExceptionHandler;
 import com.nepxion.eventbus.constant.EventConstant;
+import com.nepxion.eventbus.thread.ThreadPoolFactory;
 
 @Component("eventControllerFactory")
 public final class EventControllerFactory {
-    private final ConcurrentMap<String, EventController> syncControllerMap = Maps.newConcurrentMap();
-    private final ConcurrentMap<String, EventController> asyncControllerMap = Maps.newConcurrentMap();
+    @Autowired
+    private ThreadPoolFactory threadPoolFactory;
+
+    private volatile Map<String, EventController> syncControllerMap = new ConcurrentHashMap<String, EventController>();
+    private volatile Map<String, EventController> asyncControllerMap = new ConcurrentHashMap<String, EventController>();
 
     private EventControllerFactory() {
 
@@ -52,7 +56,7 @@ public final class EventControllerFactory {
             case SYNC:
                 EventController syncEventController = syncControllerMap.get(identifier);
                 if (syncEventController == null) {
-                    EventController newEventController = createSyncController();
+                    EventController newEventController = createSyncController(identifier);
                     syncEventController = syncControllerMap.putIfAbsent(identifier, newEventController);
                     if (syncEventController == null) {
                         syncEventController = newEventController;
@@ -63,7 +67,7 @@ public final class EventControllerFactory {
             case ASYNC:
                 EventController asyncEventController = asyncControllerMap.get(identifier);
                 if (asyncEventController == null) {
-                    EventController newEventController = createAsyncController(Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors()));
+                    EventController newEventController = createAsyncController(identifier, threadPoolFactory.getThreadPoolExecutor("EventController"));
                     asyncEventController = asyncControllerMap.putIfAbsent(identifier, newEventController);
                     if (asyncEventController == null) {
                         asyncEventController = newEventController;

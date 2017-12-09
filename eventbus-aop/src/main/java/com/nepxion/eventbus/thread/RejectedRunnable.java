@@ -1,4 +1,4 @@
-package com.nepxion.eventbus.constant;
+package com.nepxion.eventbus.thread;
 
 /**
  * <p>Title: Nepxion EventBus</p>
@@ -10,6 +10,7 @@ package com.nepxion.eventbus.constant;
  * @version 1.0
  */
 
-public class EventConstant {
-    public static final String SINGLETON = "singleton";
+public interface RejectedRunnable extends Runnable {
+    // 如果任务被拒绝，用户自行处理
+    void rejected();
 }

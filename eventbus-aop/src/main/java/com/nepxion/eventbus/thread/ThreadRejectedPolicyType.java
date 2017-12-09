@@ -1,4 +1,4 @@
-package com.nepxion.eventbus.core;
+package com.nepxion.eventbus.thread;
 
 /**
  * <p>Title: Nepxion EventBus</p>
@@ -10,13 +10,16 @@ package com.nepxion.eventbus.core;
  * @version 1.0
  */
 
-public enum EventType {
-    SYNC("Sync"),
-    ASYNC("Async");
+public enum ThreadRejectedPolicyType {
+    BLOCKING_POLICY_WITH_REPORT("BlockingPolicyWithReport"),
+    CALLER_RUNS_POLICY_WITH_REPORT("CallerRunsPolicyWithReport"),
+    ABORT_POLICY_WITH_REPORT("AbortPolicyWithReport"),
+    REJECTED_POLICY_WITH_REPORT("RejectedPolicyWithReport"),
+    DISCARDED_POLICY_WITH_REPORT("DiscardedPolicyWithReport");
 
     private String value;
 
-    private EventType(String value) {
+    private ThreadRejectedPolicyType(String value) {
         this.value = value;
     }
 
@@ -24,8 +27,8 @@ public enum EventType {
         return value;
     }
 
-    public static EventType fromString(String value) {
-        for (EventType type : EventType.values()) {
+    public static ThreadRejectedPolicyType fromString(String value) {
+        for (ThreadRejectedPolicyType type : ThreadRejectedPolicyType.values()) {
             if (type.getValue().equalsIgnoreCase(value.trim())) {
                 return type;
             }
