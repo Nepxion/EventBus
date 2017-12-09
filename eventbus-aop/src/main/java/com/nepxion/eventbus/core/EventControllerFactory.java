@@ -67,7 +67,7 @@ public final class EventControllerFactory {
             case ASYNC:
                 EventController asyncEventController = asyncControllerMap.get(identifier);
                 if (asyncEventController == null) {
-                    EventController newEventController = createAsyncController(identifier, threadPoolFactory.getThreadPoolExecutor("EventController"));
+                    EventController newEventController = createAsyncController(identifier, threadPoolFactory.getThreadPoolExecutor(identifier));
                     asyncEventController = asyncControllerMap.putIfAbsent(identifier, newEventController);
                     if (asyncEventController == null) {
                         asyncEventController = newEventController;

@@ -14,6 +14,7 @@ public class ThreadConstant {
     public static final int CPUS = Math.max(2, Runtime.getRuntime().availableProcessors());
 
     public static final String THREAD_POOL_MULTI_MODE = "threadPoolMultiMode";
+    public static final String THREAD_POOL_SINGLETON_NAME = "threadPoolSingletonName";
     public static final String THREAD_POOL_NAME_CUSTOMIZED = "threadPoolNameCustomized";
     public static final String THREAD_POOL_CORE_POOL_SIZE = "threadPoolCorePoolSize";
     public static final String THREAD_POOL_MAXIMUM_POOL_SIZE = "threadPoolMaximumPoolSize";
