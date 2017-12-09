@@ -28,7 +28,7 @@ public @interface EnableEventBus {
      * 事件标识
      * @return
      */
-    String identifier() default EventConstant.SINGLETON;
+    String identifier() default EventConstant.SHARED_CONTROLLER;
 
     /**
      * 事件是否采用异步执行

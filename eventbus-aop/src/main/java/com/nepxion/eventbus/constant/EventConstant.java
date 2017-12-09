@@ -11,5 +11,5 @@ package com.nepxion.eventbus.constant;
  */
 
 public class EventConstant {
-    public static final String SINGLETON = "Singleton";
+    public static final String SHARED_CONTROLLER = "SharedController";
 }

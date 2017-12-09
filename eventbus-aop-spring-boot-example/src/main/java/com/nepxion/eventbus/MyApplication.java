@@ -28,7 +28,7 @@ public class MyApplication {
 
         for (int i = 0; i < 20; i++) {
             // 异步模式下(默认)，子线程中收到派发的事件
-            eventControllerFactory.getSingletonController().post(new Event("A-" + i));
+            eventControllerFactory.getSharedController().post(new Event("A-" + i));
 
             // 同步模式下，主线程中收到派发的事件
             // 事件派发接口中eventControllerFactory.getController(identifier, async)必须和@EnableEventBus参数保持一致，否则会收不到事件

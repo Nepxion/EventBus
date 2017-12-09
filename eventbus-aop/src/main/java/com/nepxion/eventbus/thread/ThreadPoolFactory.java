@@ -30,8 +30,8 @@ public class ThreadPoolFactory {
     @Value("${" + ThreadConstant.THREAD_POOL_MULTI_MODE + "}")
     private boolean threadPoolMultiMode;
 
-    @Value("${" + ThreadConstant.THREAD_POOL_SINGLETON_NAME + "}")
-    private String threadPoolSingletonName;
+    @Value("${" + ThreadConstant.THREAD_POOL_SHARED_NAME + "}")
+    private String threadPoolSharedName;
 
     @Value("${" + ThreadConstant.THREAD_POOL_NAME_CUSTOMIZED + "}")
     private boolean threadPoolNameCustomized;
@@ -74,15 +74,15 @@ public class ThreadPoolFactory {
 
             return threadPoolExecutor;
         } else {
-            return createSingletonThreadPoolExecutor();
+            return createSharedThreadPoolExecutor();
         }
     }
 
-    private ThreadPoolExecutor createSingletonThreadPoolExecutor() {
+    private ThreadPoolExecutor createSharedThreadPoolExecutor() {
         if (threadPoolExecutor == null) {
             synchronized (ThreadPoolFactory.class) {
                 if (threadPoolExecutor == null) {
-                    threadPoolExecutor = createThreadPoolExecutor(threadPoolSingletonName);
+                    threadPoolExecutor = createThreadPoolExecutor(threadPoolSharedName);
                 }
             }
         }
