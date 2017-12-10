@@ -18,7 +18,7 @@ import com.google.common.eventbus.Subscribe;
 import com.nepxion.eventbus.annotation.EnableEventBus;
 import com.nepxion.eventbus.core.Event;
 
-@EnableEventBus(identifier = "MyService2", async = false)
+@EnableEventBus(async = false)
 @Service("myService2Impl")
 public class MyService2Impl {
     private static final Logger LOG = LoggerFactory.getLogger(MyService2Impl.class);

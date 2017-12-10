@@ -35,16 +35,20 @@ public final class EventControllerFactory {
 
     }
 
-    public EventController getSharedController() {
-        return getSharedController(true);
+    public EventController getAsyncController() {
+        return getAsyncController(EventConstant.SHARED_CONTROLLER);
     }
 
-    public EventController getSharedController(boolean async) {
-        return getSharedController(async ? EventType.ASYNC : EventType.SYNC);
+    public EventController getAsyncController(String identifier) {
+        return getController(identifier, true);
     }
 
-    public EventController getSharedController(EventType type) {
-        return getController(EventConstant.SHARED_CONTROLLER, type);
+    public EventController getSyncController() {
+        return getSyncController(EventConstant.SHARED_CONTROLLER);
+    }
+
+    public EventController getSyncController(String identifier) {
+        return getController(identifier, false);
     }
 
     public EventController getController(String identifier, boolean async) {

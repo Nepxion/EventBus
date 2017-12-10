@@ -26,13 +26,11 @@ public class MyApplication {
 
         EventControllerFactory eventControllerFactory = EventContextAware.getBean(EventControllerFactory.class);
 
-        for (int i = 0; i < 20; i++) {
-            // 异步模式下(默认)，子线程中收到派发的事件
-            eventControllerFactory.getSharedController().post(new Event("A-" + i));
+        // 异步模式下(默认)，子线程中收到派发的事件
+        eventControllerFactory.getAsyncController().post(new Event("Async Event"));
 
-            // 同步模式下，主线程中收到派发的事件
-            // 事件派发接口中eventControllerFactory.getController(identifier, async)必须和@EnableEventBus参数保持一致，否则会收不到事件
-            eventControllerFactory.getController("MyService2", false).post(new Event("B-" + i));
-        }
+        // 同步模式下，主线程中收到派发的事件
+        // 事件派发接口中eventControllerFactory.getSyncController(identifier)必须和@EnableEventBus参数保持一致，否则会收不到事件
+        eventControllerFactory.getSyncController().post(new Event("Sync Event"));
     }
 }
