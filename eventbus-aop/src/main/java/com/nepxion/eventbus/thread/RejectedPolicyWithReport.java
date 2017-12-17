@@ -53,7 +53,7 @@ public class RejectedPolicyWithReport implements RejectedExecutionHandler {
                     // 添加一个元素， 如果队列满，则阻塞
                     queue.put(runnable);
                 } catch (InterruptedException e) {
-                    // should not be interrupted 
+                    // should not be interrupted
                 }
             }
         }
