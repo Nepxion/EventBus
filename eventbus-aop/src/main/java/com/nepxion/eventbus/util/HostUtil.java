@@ -23,8 +23,13 @@ public class HostUtil {
     private static final char COLON = ':';
     private static final String LOCAL_HOST = "127.0.0.1";
 
+    private static String localHost;
+    static {
+        localHost = retrieveLocalhost();
+    }
+
     // 多网卡中获取IP地址
-    public static String getLocalhost() {
+    private static String retrieveLocalhost() {
         Enumeration<NetworkInterface> interfaces = null;
         try {
             interfaces = NetworkInterface.getNetworkInterfaces();
@@ -48,5 +53,9 @@ public class HostUtil {
         }
 
         return LOCAL_HOST;
+    }
+
+    public static String getLocalhost() {
+        return localHost;
     }
 }

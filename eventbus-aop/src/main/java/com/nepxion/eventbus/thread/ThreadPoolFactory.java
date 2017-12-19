@@ -62,8 +62,6 @@ public class ThreadPoolFactory {
     @Value("${" + ThreadConstant.THREAD_POOL_REJECTED_POLICY + "}")
     private String threadPoolRejectedPolicy;
 
-    private String host = HostUtil.getLocalhost();
-
     private volatile Map<String, ThreadPoolExecutor> threadPoolExecutorMap = new ConcurrentHashMap<String, ThreadPoolExecutor>();
 
     private ThreadPoolExecutor threadPoolExecutor;
@@ -102,7 +100,7 @@ public class ThreadPoolFactory {
     }
 
     private String createThreadPoolName(String threadPoolName) {
-        return threadPoolNameIPShown ? threadPoolName + "-" + host + "-thread" : threadPoolName + "-thread";
+        return threadPoolNameIPShown ? threadPoolName + "-" + HostUtil.getLocalhost() + "-thread" : threadPoolName + "-thread";
     }
 
     private ThreadPoolExecutor createThreadPoolExecutor(String threadPoolName) {
