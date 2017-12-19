@@ -22,13 +22,18 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.nepxion.eventbus.util.HostUtil;
+import com.nepxion.eventbus.util.StringUtil;
 
 @Component("threadPoolFactory")
 public class ThreadPoolFactory {
+    private static final Logger LOG = LoggerFactory.getLogger(ThreadPoolFactory.class);
+
     @Value("${" + ThreadConstant.THREAD_POOL_MULTI_MODE + "}")
     private boolean threadPoolMultiMode;
 
@@ -100,7 +105,7 @@ public class ThreadPoolFactory {
     }
 
     private String createThreadPoolName(String threadPoolName) {
-        return threadPoolNameIPShown ? threadPoolName + "-" + HostUtil.getLocalhost() + "-thread" : threadPoolName + "-thread";
+        return threadPoolNameIPShown ? StringUtil.firstLetterToUpper(threadPoolName) + "-" + HostUtil.getLocalhost() + "-thread" : StringUtil.firstLetterToUpper(threadPoolName) + "-thread";
     }
 
     private ThreadPoolExecutor createThreadPoolExecutor(String threadPoolName) {
@@ -110,6 +115,8 @@ public class ThreadPoolFactory {
     }
 
     public static ThreadPoolExecutor createThreadPoolExecutor(String threadPoolName, int corePoolSize, int maximumPoolSize, long keepAliveTime, boolean allowCoreThreadTimeout, String queue, int queueCapacity, String rejectedPolicy) {
+        LOG.info("Thread pool executor is created, threadPoolName={}, corePoolSize={}, maximumPoolSize={}, keepAliveTime={}, allowCoreThreadTimeout={}, queue={}, queueCapacity={}, rejectedPolicy={}", threadPoolName, corePoolSize, maximumPoolSize, keepAliveTime, allowCoreThreadTimeout, queue, queueCapacity, rejectedPolicy);
+
         ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(corePoolSize,
                 maximumPoolSize,
                 keepAliveTime,
@@ -130,6 +137,8 @@ public class ThreadPoolFactory {
     }
 
     public static ThreadPoolExecutor createThreadPoolExecutor(int corePoolSize, int maximumPoolSize, long keepAliveTime, boolean allowCoreThreadTimeout, String queue, int queueCapacity, String rejectedPolicy) {
+        LOG.info("Thread pool executor is created, corePoolSize={}, maximumPoolSize={}, keepAliveTime={}, allowCoreThreadTimeout={}, queue={}, queueCapacity={}, rejectedPolicy={}", corePoolSize, maximumPoolSize, keepAliveTime, allowCoreThreadTimeout, queue, queueCapacity, rejectedPolicy);
+
         ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(corePoolSize,
                 maximumPoolSize,
                 keepAliveTime,
