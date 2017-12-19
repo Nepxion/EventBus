@@ -25,6 +25,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import com.nepxion.eventbus.util.HostUtil;
+
 @Component("threadPoolFactory")
 public class ThreadPoolFactory {
     @Value("${" + ThreadConstant.THREAD_POOL_MULTI_MODE + "}")
@@ -35,6 +37,9 @@ public class ThreadPoolFactory {
 
     @Value("${" + ThreadConstant.THREAD_POOL_NAME_CUSTOMIZED + "}")
     private boolean threadPoolNameCustomized;
+
+    @Value("${" + ThreadConstant.THREAD_POOL_NAME_IP_SHOWN + "}")
+    private boolean threadPoolNameIPShown;
 
     @Value("${" + ThreadConstant.THREAD_POOL_CORE_POOL_SIZE + "}")
     private int threadPoolCorePoolSize;
@@ -57,16 +62,20 @@ public class ThreadPoolFactory {
     @Value("${" + ThreadConstant.THREAD_POOL_REJECTED_POLICY + "}")
     private String threadPoolRejectedPolicy;
 
+    private String host = HostUtil.getLocalhost();
+
     private volatile Map<String, ThreadPoolExecutor> threadPoolExecutorMap = new ConcurrentHashMap<String, ThreadPoolExecutor>();
 
     private ThreadPoolExecutor threadPoolExecutor;
 
     public ThreadPoolExecutor getThreadPoolExecutor(String threadPoolName) {
+        String poolName = createThreadPoolName(threadPoolName);
+
         if (threadPoolMultiMode) {
-            ThreadPoolExecutor threadPoolExecutor = threadPoolExecutorMap.get(threadPoolName);
+            ThreadPoolExecutor threadPoolExecutor = threadPoolExecutorMap.get(poolName);
             if (threadPoolExecutor == null) {
-                ThreadPoolExecutor newThreadPoolExecutor = createThreadPoolExecutor(threadPoolName);
-                threadPoolExecutor = threadPoolExecutorMap.putIfAbsent(threadPoolName, newThreadPoolExecutor);
+                ThreadPoolExecutor newThreadPoolExecutor = createThreadPoolExecutor(poolName);
+                threadPoolExecutor = threadPoolExecutorMap.putIfAbsent(poolName, newThreadPoolExecutor);
                 if (threadPoolExecutor == null) {
                     threadPoolExecutor = newThreadPoolExecutor;
                 }
@@ -79,15 +88,21 @@ public class ThreadPoolFactory {
     }
 
     private ThreadPoolExecutor createSharedThreadPoolExecutor() {
+        String poolName = createThreadPoolName(threadPoolSharedName);
+
         if (threadPoolExecutor == null) {
             synchronized (ThreadPoolFactory.class) {
                 if (threadPoolExecutor == null) {
-                    threadPoolExecutor = createThreadPoolExecutor(threadPoolSharedName);
+                    threadPoolExecutor = createThreadPoolExecutor(poolName);
                 }
             }
         }
 
         return threadPoolExecutor;
+    }
+
+    private String createThreadPoolName(String threadPoolName) {
+        return threadPoolNameIPShown ? threadPoolName + "-" + host + "-thread" : threadPoolName + "-thread";
     }
 
     private ThreadPoolExecutor createThreadPoolExecutor(String threadPoolName) {
