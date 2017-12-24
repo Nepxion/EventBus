@@ -37,7 +37,7 @@ threadPoolRejectedPolicy=BlockingPolicyWithReport
 ```
 
 ## 示例
-示例1，异步模式(默认)下接收事件
+调用入口1，异步模式(默认)下接收事件
 ```java
 package com.nepxion.eventbus.service;
 
@@ -71,7 +71,7 @@ public class MyService1Impl {
 }
 ```
 
-示例2，同步模式下接收事件
+调用入口2，同步模式下接收事件
 ```java
 package com.nepxion.eventbus.service;
 
@@ -105,7 +105,7 @@ public class MyService2Impl {
 }
 ```
 
-示例3，派发事件
+调用入口3，派发事件
 ```javapackage com.nepxion.eventbus;
 
 /**
