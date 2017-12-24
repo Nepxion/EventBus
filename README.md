@@ -143,3 +143,13 @@ public class MyApplication {
     }
 }
 ```
+
+运行结果
+```java
+2017-12-24 15:09:28.910 INFO [EventBus-192.168.1.3-thread-0][com.nepxion.eventbus.service.MyService1Impl:28] - Event Received - com.nepxion.eventbus.core.Event@621adb11[
+  source=Async Event
+]
+2017-12-24 15:09:28.910 INFO [main][com.nepxion.eventbus.service.MyService2Impl:28] - Event Received - com.nepxion.eventbus.core.Event@6de30571[
+  source=Sync Event
+]
+```
