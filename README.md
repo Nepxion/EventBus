@@ -1,9 +1,10 @@
-# EventBus
+# Nepxion EventBus
 [![Apache License 2](https://img.shields.io/badge/license-ASF2-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0.txt)
 
-基于Google Guava机制定制，基于注解方式轻松实现事件总线逻辑
+Nepxion EventBus是一款基于Google Guava通用事件派发机制的事件总线组件，它采用Nepxion Matrix AOP框架进行切面架构，提供注解调用方式
 
-## 介绍
+## 简介
+支持如下功能
 
     1. 实现基于@EnableEventBus注解开启EventBus机制
     2. 实现异步模式下(默认)，子线程中收到派发的事件
@@ -11,7 +12,31 @@
     4. 实现同步模式下，主线程中收到派发的事件
     5. 实现线程隔离技术，并定制化配置线程池
 
-## 使用
+## 配置
+线程池配置，参考application.properties
+```java
+# Thread Pool Config
+# Multi thread pool，是否线程隔离，如果是那么每个不同类型的事件都会占用一个单独线程池，否则共享一个线程池
+threadPoolMultiMode=false
+# 共享线程池的名称
+threadPoolSharedName=EventBus
+# 是否显示自定义的线程池名
+threadPoolNameCustomized=true
+# CPU unit
+threadPoolCorePoolSize=4
+# CPU unit
+threadPoolMaximumPoolSize=8
+threadPoolKeepAliveTime=900000
+threadPoolAllowCoreThreadTimeout=false
+# LinkedBlockingQueue, ArrayBlockingQueue, SynchronousQueue
+threadPoolQueue=LinkedBlockingQueue
+# CPU unit (Used for LinkedBlockingQueue or ArrayBlockingQueue)
+threadPoolQueueCapacity=1024
+# BlockingPolicyWithReport, CallerRunsPolicyWithReport, AbortPolicyWithReport, RejectedPolicyWithReport, DiscardedPolicyWithReport
+threadPoolRejectedPolicy=BlockingPolicyWithReport
+```
+
+## 示例
 示例1，异步模式(默认)下接收事件
 ```java
 package com.nepxion.eventbus.service;
@@ -119,25 +144,3 @@ public class MyApplication {
 }
 ```
 
-线程池配置，参考application.properties
-```java
-# Thread Pool Config
-# Multi thread pool，是否线程隔离，如果是那么每个不同类型的事件都会占用一个单独线程池，否则共享一个线程池
-threadPoolMultiMode=false
-# 共享线程池的名称
-threadPoolSharedName=EventBus
-# 是否显示自定义的线程池名
-threadPoolNameCustomized=true
-# CPU unit
-threadPoolCorePoolSize=4
-# CPU unit
-threadPoolMaximumPoolSize=8
-threadPoolKeepAliveTime=900000
-threadPoolAllowCoreThreadTimeout=false
-# LinkedBlockingQueue, ArrayBlockingQueue, SynchronousQueue
-threadPoolQueue=LinkedBlockingQueue
-# CPU unit (Used for LinkedBlockingQueue or ArrayBlockingQueue)
-threadPoolQueueCapacity=1024
-# BlockingPolicyWithReport, CallerRunsPolicyWithReport, AbortPolicyWithReport, RejectedPolicyWithReport, DiscardedPolicyWithReport
-threadPoolRejectedPolicy=BlockingPolicyWithReport
-```
