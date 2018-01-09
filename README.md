@@ -1,5 +1,6 @@
 # Nepxion EventBus
-[![Apache License 2](https://img.shields.io/badge/license-ASF2-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0.txt)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/Nepxion/EventBus/blob/master/LICENSE)
+[![Build Status](https://travis-ci.org/Nepxion/EventBus.svg?branch=master)](https://travis-ci.org/Nepxion/EventBus)
 
 Nepxion EventBus是一款基于Google Guava通用事件派发机制的事件总线组件，它采用Nepxion Matrix AOP框架进行切面架构，提供注解调用方式，支持异步和同步两种方式
 
