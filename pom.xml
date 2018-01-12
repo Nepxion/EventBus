@@ -8,7 +8,7 @@
     <modelVersion>4.0.0</modelVersion>
     <version>1.0.0</version>
     <description>Nepxion EventBus is a generic event dispatching component based on Google Guava with Nepxion Matrix AOP framework</description>
-    <url>https://github.com/Nepxion/</url>
+    <url>http://www.nepxion.com</url>
 
     <modules>
         <module>eventbus-aop</module>
