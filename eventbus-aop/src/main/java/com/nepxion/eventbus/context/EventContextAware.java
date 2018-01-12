@@ -22,6 +22,18 @@ import org.springframework.stereotype.Component;
 public class EventContextAware implements ApplicationContextAware {
     private static ApplicationContext applicationContext;
 
+    static {
+        System.out.println("");
+        System.out.println("╔═══╗        ╔╗╔══╗");
+        System.out.println("║╔══╝       ╔╝╚╣╔╗║");
+        System.out.println("║╚══╦╗╔╦══╦═╬╗╔╣╚╝╚╦╗╔╦══╗");
+        System.out.println("║╔══╣╚╝║║═╣╔╗╣║║╔═╗║║║║══╣");
+        System.out.println("║╚══╬╗╔╣║═╣║║║╚╣╚═╝║╚╝╠══║");
+        System.out.println("╚═══╝╚╝╚══╩╝╚╩═╩═══╩══╩══╝");
+        System.out.println("Nepxion EventBus  v1.0.0.RELEASE");
+        System.out.println("");
+    }
+
     private EventContextAware() {
     }
 
