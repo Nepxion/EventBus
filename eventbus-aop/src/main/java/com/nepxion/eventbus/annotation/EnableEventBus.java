@@ -25,12 +25,13 @@ import com.nepxion.eventbus.constant.EventConstant;
 public @interface EnableEventBus {
     /**
      * 事件标识
-     * @return
+     * @return identifier
      */
     String identifier() default EventConstant.SHARED_CONTROLLER;
 
     /**
      * 事件是否采用异步执行
+     * @return boolean
      */
     boolean async() default true;
 }
