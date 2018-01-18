@@ -16,4 +16,5 @@
 @color 0a
 
 mvn versions:set -DnewVersion=1.0.1
+
 pause
