@@ -15,6 +15,16 @@ Nepxion EventBus是一款基于Google Guava通用事件派发机制的事件总�
     4. 实现同步模式下，主线程中收到派发的事件
     5. 实现线程隔离技术，并定制化配置线程池
 
+## 依赖
+```xml
+<dependency>
+  <groupId>com.nepxion</groupId>
+  <artifactId>eventbus-aop</artifactId>
+  <version>${eventbus.version}</version>
+</dependency>
+```
+```
+
 ## 配置
 线程池配置，参考application.properties
 ```java
