@@ -29,7 +29,7 @@ public class EventContextAware implements ApplicationContextAware {
         System.out.println("║╔══╣╚╝║║═╣╔╗╣║║╔═╗║║║║══╣");
         System.out.println("║╚══╬╗╔╣║═╣║║║╚╣╚═╝║╚╝╠══║");
         System.out.println("╚═══╝╚╝╚══╩╝╚╩═╩═══╩══╩══╝");
-        System.out.println("Nepxion EventBus  v1.0.1");
+        System.out.println("Nepxion EventBus  v1.0.2");
         System.out.println("");
     }
 
