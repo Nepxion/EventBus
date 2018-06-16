@@ -9,7 +9,7 @@ Nepxion EventBus是一款基于Google Guava通用事件派发机制的事件总�
 ## 简介
 支持如下功能
 
-    1. 实现基于@EnableEventBus注解开启EventBus机制
+    1. 实现基于@EventBus注解开启EventBus机制
     2. 实现异步模式下(默认)，子线程中收到派发的事件
     3. 实现批量派发事件
     4. 实现同步模式下，主线程中收到派发的事件
@@ -51,12 +51,12 @@ threadPoolRejectedPolicy=BlockingPolicyWithReport
 ## 示例
 调用入口1，异步模式(默认)下接收事件
 ```java
-package com.nepxion.eventbus.service;
+package com.nepxion.eventbus.example.service;
 
 /**
  * <p>Title: Nepxion EventBus</p>
  * <p>Description: Nepxion EventBus AOP</p>
- * <p>Copyright: Copyright (c) 2017</p>
+ * <p>Copyright: Copyright (c) 2017-2050</p>
  * <p>Company: Nepxion</p>
  * @author Haojun Ren
  * @version 1.0
@@ -84,12 +84,12 @@ public class MyService1Impl {
 
 调用入口2，同步模式下接收事件
 ```java
-package com.nepxion.eventbus.service;
+package com.nepxion.eventbus.example.service;
 
 /**
  * <p>Title: Nepxion EventBus</p>
  * <p>Description: Nepxion EventBus AOP</p>
- * <p>Copyright: Copyright (c) 2017</p>
+ * <p>Copyright: Copyright (c) 2017-2050</p>
  * <p>Company: Nepxion</p>
  * @author Haojun Ren
  * @version 1.0
@@ -117,7 +117,7 @@ public class MyService2Impl {
 
 调用入口3，派发事件
 ```java
-package com.nepxion.eventbus;
+package com.nepxion.eventbus.example;
 
 /**
  * <p>Title: Nepxion EventBus</p>
@@ -137,7 +137,7 @@ import com.nepxion.eventbus.core.Event;
 import com.nepxion.eventbus.core.EventControllerFactory;
 
 @SpringBootApplication
-@Import({ com.nepxion.eventbus.configuration.EventBusConfiguration.class })
+@Import({ com.nepxion.eventbus.config.EventBusConfig.class })
 public class MyApplication {
     public static void main(String[] args) throws Exception {
         SpringApplication.run(MyApplication.class, args);
