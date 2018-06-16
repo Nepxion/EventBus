@@ -67,10 +67,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.google.common.eventbus.Subscribe;
-import com.nepxion.eventbus.annotation.EnableEventBus;
+import com.nepxion.eventbus.annotation.EventBus;
 import com.nepxion.eventbus.core.Event;
 
-@EnableEventBus
+@EventBus
 @Service("myService1Impl")
 public class MyService1Impl {
     private static final Logger LOG = LoggerFactory.getLogger(MyService1Impl.class);
@@ -100,10 +100,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.google.common.eventbus.Subscribe;
-import com.nepxion.eventbus.annotation.EnableEventBus;
+import com.nepxion.eventbus.annotation.EventBus;
 import com.nepxion.eventbus.core.Event;
 
-@EnableEventBus(async = false)
+@EventBus(async = false)
 @Service("myService2Impl")
 public class MyService2Impl {
     private static final Logger LOG = LoggerFactory.getLogger(MyService2Impl.class);
@@ -116,27 +116,28 @@ public class MyService2Impl {
 ```
 
 调用入口3，派发事件
-```javapackage com.nepxion.eventbus;
+```java
+package com.nepxion.eventbus;
 
 /**
  * <p>Title: Nepxion EventBus</p>
  * <p>Description: Nepxion EventBus AOP</p>
- * <p>Copyright: Copyright (c) 2017</p>
+ * <p>Copyright: Copyright (c) 2017-2050</p>
  * <p>Company: Nepxion</p>
  * @author Haojun Ren
  * @version 1.0
  */
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Import;
 
 import com.nepxion.eventbus.context.EventContextAware;
 import com.nepxion.eventbus.core.Event;
 import com.nepxion.eventbus.core.EventControllerFactory;
 
-@EnableAutoConfiguration
-@ComponentScan(basePackages = { "com.nepxion.eventbus" })
+@SpringBootApplication
+@Import({ com.nepxion.eventbus.configuration.EventBusConfiguration.class })
 public class MyApplication {
     public static void main(String[] args) throws Exception {
         SpringApplication.run(MyApplication.class, args);
