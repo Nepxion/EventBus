@@ -1,4 +1,4 @@
-package com.nepxion.eventbus.configuration;
+package com.nepxion.eventbus.config;
 
 /**
  * <p>Title: Nepxion Permission</p>
@@ -14,6 +14,6 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @ComponentScan(basePackages = { "com.nepxion.eventbus" })
-public class EventBusConfiguration {
+public class EventBusConfig {
 
 }

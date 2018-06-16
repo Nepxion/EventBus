@@ -18,7 +18,7 @@ import com.nepxion.eventbus.core.Event;
 import com.nepxion.eventbus.core.EventControllerFactory;
 
 @SpringBootApplication
-@Import({ com.nepxion.eventbus.configuration.EventBusConfiguration.class })
+@Import({ com.nepxion.eventbus.config.EventBusConfig.class })
 public class MyApplication {
     public static void main(String[] args) throws Exception {
         SpringApplication.run(MyApplication.class, args);
