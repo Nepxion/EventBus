@@ -1,4 +1,4 @@
-package com.nepxion.eventbus;
+package com.nepxion.eventbus.example;
 
 /**
  * <p>Title: Nepxion EventBus</p>

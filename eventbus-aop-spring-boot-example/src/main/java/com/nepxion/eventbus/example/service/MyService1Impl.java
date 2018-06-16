@@ -1,4 +1,4 @@
-package com.nepxion.eventbus.service;
+package com.nepxion.eventbus.example.service;
 
 /**
  * <p>Title: Nepxion EventBus</p>
@@ -17,10 +17,10 @@ import com.google.common.eventbus.Subscribe;
 import com.nepxion.eventbus.annotation.EventBus;
 import com.nepxion.eventbus.core.Event;
 
-@EventBus(async = false)
-@Service("myService2Impl")
-public class MyService2Impl {
-    private static final Logger LOG = LoggerFactory.getLogger(MyService2Impl.class);
+@EventBus
+@Service("myService1Impl")
+public class MyService1Impl {
+    private static final Logger LOG = LoggerFactory.getLogger(MyService1Impl.class);
 
     @Subscribe
     public void subscribe(Event event) {
