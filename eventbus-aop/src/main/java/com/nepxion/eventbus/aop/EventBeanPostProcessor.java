@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.stereotype.Component;
 
-import com.nepxion.eventbus.annotation.EnableEventBus;
+import com.nepxion.eventbus.annotation.EventBus;
 import com.nepxion.eventbus.core.EventControllerFactory;
 
 @Component("eventBeanPostProcessor")
@@ -29,8 +29,8 @@ public class EventBeanPostProcessor implements BeanPostProcessor {
 
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-        if (bean.getClass().isAnnotationPresent(EnableEventBus.class)) {
-            EnableEventBus eventBusAnnotation = bean.getClass().getAnnotation(EnableEventBus.class);
+        if (bean.getClass().isAnnotationPresent(EventBus.class)) {
+            EventBus eventBusAnnotation = bean.getClass().getAnnotation(EventBus.class);
             String identifier = eventBusAnnotation.identifier();
             boolean async = eventBusAnnotation.async();
 

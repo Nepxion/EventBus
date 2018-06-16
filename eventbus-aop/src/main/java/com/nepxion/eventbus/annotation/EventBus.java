@@ -22,7 +22,7 @@ import com.nepxion.eventbus.constant.EventConstant;
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @Documented
-public @interface EnableEventBus {
+public @interface EventBus {
     /**
      * 事件标识
      * @return identifier

@@ -14,10 +14,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.google.common.eventbus.Subscribe;
-import com.nepxion.eventbus.annotation.EnableEventBus;
+import com.nepxion.eventbus.annotation.EventBus;
 import com.nepxion.eventbus.core.Event;
 
-@EnableEventBus
+@EventBus
 @Service("myService1Impl")
 public class MyService1Impl {
     private static final Logger LOG = LoggerFactory.getLogger(MyService1Impl.class);
