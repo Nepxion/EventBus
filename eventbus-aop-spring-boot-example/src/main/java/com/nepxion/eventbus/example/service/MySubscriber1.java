@@ -18,12 +18,12 @@ import com.nepxion.eventbus.annotation.EventBus;
 import com.nepxion.eventbus.core.Event;
 
 @EventBus
-@Service("myService1Impl")
-public class MyService1Impl {
-    private static final Logger LOG = LoggerFactory.getLogger(MyService1Impl.class);
+@Service
+public class MySubscriber1 {
+    private static final Logger LOG = LoggerFactory.getLogger(MySubscriber1.class);
 
     @Subscribe
     public void subscribe(Event event) {
-        LOG.info("Event Received - {}", event);
+        LOG.info("主线程接收同步事件 - {}", event);
     }
 }

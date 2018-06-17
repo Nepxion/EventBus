@@ -13,21 +13,14 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
-import com.nepxion.eventbus.core.Event;
-import com.nepxion.eventbus.core.EventControllerFactory;
+import com.nepxion.eventbus.example.service.MyPublisher;
 
 @SpringBootApplication
 public class MyApplication {
     public static void main(String[] args) throws Exception {
         ConfigurableApplicationContext applicationContext = SpringApplication.run(MyApplication.class, args);
 
-        EventControllerFactory eventControllerFactory = applicationContext.getBean(EventControllerFactory.class);
-
-        // 异步模式下(默认)，子线程中收到派发的事件
-        eventControllerFactory.getAsyncController().post(new Event("Async Event"));
-
-        // 同步模式下，主线程中收到派发的事件
-        // 事件派发接口中eventControllerFactory.getSyncController(identifier)必须和@EnableEventBus参数保持一致，否则会收不到事件
-        eventControllerFactory.getSyncController().post(new Event("Sync Event"));
+        MyPublisher myPublisher = applicationContext.getBean(MyPublisher.class);
+        myPublisher.publish();
     }
 }
