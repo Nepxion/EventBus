@@ -13,12 +13,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;
 
+import com.nepxion.eventbus.config.EventBusConfig;
 import com.nepxion.eventbus.context.EventContextAware;
 import com.nepxion.eventbus.core.Event;
 import com.nepxion.eventbus.core.EventControllerFactory;
 
 @SpringBootApplication
-@Import({ com.nepxion.eventbus.config.EventBusConfig.class })
+@Import({ EventBusConfig.class })
 public class MyApplication {
     public static void main(String[] args) throws Exception {
         SpringApplication.run(MyApplication.class, args);
