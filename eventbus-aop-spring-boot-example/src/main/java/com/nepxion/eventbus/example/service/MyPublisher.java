@@ -20,13 +20,13 @@ import com.nepxion.eventbus.core.EventControllerFactory;
 @Service
 public class MyPublisher {
     private static final Logger LOG = LoggerFactory.getLogger(MyPublisher.class);
-    
+
     @Autowired
     private EventControllerFactory eventControllerFactory;
 
     public void publish() {
         LOG.info("发送事件...");
-        
+
         // 异步模式下(默认)，子线程中收到派发的事件
         eventControllerFactory.getAsyncController().post(new Event("Async Event"));
 

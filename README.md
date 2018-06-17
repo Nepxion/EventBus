@@ -71,13 +71,13 @@ import com.nepxion.eventbus.annotation.EventBus;
 import com.nepxion.eventbus.core.Event;
 
 @EventBus
-@Service("myService1Impl")
-public class MyService1Impl {
-    private static final Logger LOG = LoggerFactory.getLogger(MyService1Impl.class);
+@Service
+public class MySubscriber1 {
+    private static final Logger LOG = LoggerFactory.getLogger(MySubscriber1.class);
 
     @Subscribe
     public void subscribe(Event event) {
-        LOG.info("Event Received - {}", event);
+        LOG.info("主线程接收同步事件 - {}", event);
     }
 }
 ```
@@ -104,18 +104,59 @@ import com.nepxion.eventbus.annotation.EventBus;
 import com.nepxion.eventbus.core.Event;
 
 @EventBus(async = false)
-@Service("myService2Impl")
-public class MyService2Impl {
-    private static final Logger LOG = LoggerFactory.getLogger(MyService2Impl.class);
+@Service
+public class MySubscriber2 {
+    private static final Logger LOG = LoggerFactory.getLogger(MySubscriber2.class);
 
     @Subscribe
     public void subscribe(Event event) {
-        LOG.info("Event Received - {}", event);
+        LOG.info("子线程接收异步事件 - {}", event);
     }
 }
 ```
 
 调用入口3，派发事件
+```java
+package com.nepxion.eventbus.example.service;
+
+/**
+ * <p>Title: Nepxion EventBus</p>
+ * <p>Description: Nepxion EventBus AOP</p>
+ * <p>Copyright: Copyright (c) 2017-2050</p>
+ * <p>Company: Nepxion</p>
+ * @author Haojun Ren
+ * @version 1.0
+ */
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.nepxion.eventbus.core.Event;
+import com.nepxion.eventbus.core.EventControllerFactory;
+
+@Service
+public class MyPublisher {
+    private static final Logger LOG = LoggerFactory.getLogger(MyPublisher.class);
+
+    @Autowired
+    private EventControllerFactory eventControllerFactory;
+
+    public void publish() {
+        LOG.info("发送事件...");
+        
+        // 异步模式下(默认)，子线程中收到派发的事件
+        eventControllerFactory.getAsyncController().post(new Event("Async Event"));
+
+        // 同步模式下，主线程中收到派发的事件
+        // 事件派发接口中eventControllerFactory.getSyncController(identifier)必须和@EnableEventBus参数保持一致，否则会收不到事件
+        eventControllerFactory.getSyncController().post(new Event("Sync Event"));
+    }
+}
+```
+
+主入口
 ```java
 package com.nepxion.eventbus.example;
 
@@ -130,36 +171,17 @@ package com.nepxion.eventbus.example;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Import;
+import org.springframework.context.ConfigurableApplicationContext;
 
-import com.nepxion.eventbus.context.EventContextAware;
-import com.nepxion.eventbus.core.Event;
-import com.nepxion.eventbus.core.EventControllerFactory;
+import com.nepxion.eventbus.example.service.MyPublisher;
 
 @SpringBootApplication
-@Import({ com.nepxion.eventbus.config.EventBusConfig.class })
 public class MyApplication {
     public static void main(String[] args) throws Exception {
-        SpringApplication.run(MyApplication.class, args);
+        ConfigurableApplicationContext applicationContext = SpringApplication.run(MyApplication.class, args);
 
-        EventControllerFactory eventControllerFactory = EventContextAware.getBean(EventControllerFactory.class);
-
-        // 异步模式下(默认)，子线程中收到派发的事件
-        eventControllerFactory.getAsyncController().post(new Event("Async Event"));
-
-        // 同步模式下，主线程中收到派发的事件
-        // 事件派发接口中eventControllerFactory.getSyncController(identifier)必须和@EnableEventBus参数保持一致，否则会收不到事件
-        eventControllerFactory.getSyncController().post(new Event("Sync Event"));
+        MyPublisher myPublisher = applicationContext.getBean(MyPublisher.class);
+        myPublisher.publish();
     }
 }
-```
-
-运行结果
-```java
-2017-12-24 15:09:28.910 INFO [EventBus-192.168.1.3-thread-0][com.nepxion.eventbus.service.MyService1Impl:28] - Event Received - com.nepxion.eventbus.core.Event@621adb11[
-  source=Async Event
-]
-2017-12-24 15:09:28.910 INFO [main][com.nepxion.eventbus.service.MyService2Impl:28] - Event Received - com.nepxion.eventbus.core.Event@6de30571[
-  source=Sync Event
-]
 ```
