@@ -18,6 +18,18 @@ import com.nepxion.eventbus.thread.ThreadPoolFactory;
 
 @Configuration
 public class EventBusConfig {
+    static {
+        System.out.println("");
+        System.out.println("╔═══╗        ╔╗╔══╗");
+        System.out.println("║╔══╝       ╔╝╚╣╔╗║");
+        System.out.println("║╚══╦╗╔╦══╦═╬╗╔╣╚╝╚╦╗╔╦══╗");
+        System.out.println("║╔══╣╚╝║║═╣╔╗╣║║╔═╗║║║║══╣");
+        System.out.println("║╚══╬╗╔╣║═╣║║║╚╣╚═╝║╚╝╠══║");
+        System.out.println("╚═══╝╚╝╚══╩╝╚╩═╩═══╩══╩══╝");
+        System.out.println("Nepxion EventBus  v1.0.5");
+        System.out.println("");
+    }
+
     @Bean
     public ThreadPoolFactory threadPoolFactory() {
         return new ThreadPoolFactory();
