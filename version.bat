@@ -15,6 +15,6 @@
 @title Nepxion EventBus
 @color 0a
 
-call mvn versions:set -DnewVersion=1.0.4
+call mvn versions:set -DnewVersion=1.0.5
 
 pause
