@@ -9,11 +9,27 @@ package com.nepxion.eventbus.config;
  * @version 1.0
  */
 
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
-@ComponentScan(basePackages = { "com.nepxion.eventbus" })
-public class EventBusConfig {
+import com.nepxion.eventbus.aop.EventBeanPostProcessor;
+import com.nepxion.eventbus.core.EventControllerFactory;
+import com.nepxion.eventbus.thread.ThreadPoolFactory;
 
+@Configuration
+public class EventBusConfig {
+    @Bean
+    public ThreadPoolFactory threadPoolFactory() {
+        return new ThreadPoolFactory();
+    }
+
+    @Bean
+    public EventControllerFactory eventControllerFactory() {
+        return new EventControllerFactory();
+    }
+
+    @Bean
+    public EventBeanPostProcessor eventBeanPostProcessor() {
+        return new EventBeanPostProcessor();
+    }
 }

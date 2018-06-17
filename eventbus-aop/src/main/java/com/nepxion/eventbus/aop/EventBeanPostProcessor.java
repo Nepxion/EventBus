@@ -12,12 +12,10 @@ package com.nepxion.eventbus.aop;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanPostProcessor;
-import org.springframework.stereotype.Component;
 
 import com.nepxion.eventbus.annotation.EventBus;
 import com.nepxion.eventbus.core.EventControllerFactory;
 
-@Component("eventBeanPostProcessor")
 public class EventBeanPostProcessor implements BeanPostProcessor {
     @Autowired
     private EventControllerFactory eventControllerFactory;

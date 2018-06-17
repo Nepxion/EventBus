@@ -14,7 +14,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executor;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import com.google.common.eventbus.AsyncEventBus;
 import com.google.common.eventbus.EventBus;
@@ -22,7 +21,6 @@ import com.google.common.eventbus.SubscriberExceptionHandler;
 import com.nepxion.eventbus.constant.EventConstant;
 import com.nepxion.eventbus.thread.ThreadPoolFactory;
 
-@Component("eventControllerFactory")
 public final class EventControllerFactory {
     @Autowired
     private ThreadPoolFactory threadPoolFactory;
@@ -30,7 +28,7 @@ public final class EventControllerFactory {
     private volatile Map<String, EventController> syncControllerMap = new ConcurrentHashMap<String, EventController>();
     private volatile Map<String, EventController> asyncControllerMap = new ConcurrentHashMap<String, EventController>();
 
-    private EventControllerFactory() {
+    public EventControllerFactory() {
 
     }
 

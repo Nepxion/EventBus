@@ -11,20 +11,17 @@ package com.nepxion.eventbus.example;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Import;
+import org.springframework.context.ConfigurableApplicationContext;
 
-import com.nepxion.eventbus.config.EventBusConfig;
-import com.nepxion.eventbus.context.EventContextAware;
 import com.nepxion.eventbus.core.Event;
 import com.nepxion.eventbus.core.EventControllerFactory;
 
 @SpringBootApplication
-@Import({ EventBusConfig.class })
 public class MyApplication {
     public static void main(String[] args) throws Exception {
-        SpringApplication.run(MyApplication.class, args);
+        ConfigurableApplicationContext applicationContext = SpringApplication.run(MyApplication.class, args);
 
-        EventControllerFactory eventControllerFactory = EventContextAware.getBean(EventControllerFactory.class);
+        EventControllerFactory eventControllerFactory = applicationContext.getBean(EventControllerFactory.class);
 
         // 异步模式下(默认)，子线程中收到派发的事件
         eventControllerFactory.getAsyncController().post(new Event("Async Event"));
