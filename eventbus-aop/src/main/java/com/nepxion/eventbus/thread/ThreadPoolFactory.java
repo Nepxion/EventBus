@@ -31,37 +31,37 @@ import com.nepxion.eventbus.util.StringUtil;
 public class ThreadPoolFactory {
     private static final Logger LOG = LoggerFactory.getLogger(ThreadPoolFactory.class);
 
-    @Value("${" + ThreadConstant.THREAD_POOL_MULTI_MODE + "}")
+    @Value("${" + ThreadConstant.THREAD_POOL_MULTI_MODE + ":false}")
     private boolean threadPoolMultiMode;
 
-    @Value("${" + ThreadConstant.THREAD_POOL_SHARED_NAME + "}")
+    @Value("${" + ThreadConstant.THREAD_POOL_SHARED_NAME + ":EventBus}")
     private String threadPoolSharedName;
 
-    @Value("${" + ThreadConstant.THREAD_POOL_NAME_CUSTOMIZED + "}")
+    @Value("${" + ThreadConstant.THREAD_POOL_NAME_CUSTOMIZED + ":true}")
     private boolean threadPoolNameCustomized;
 
-    @Value("${" + ThreadConstant.THREAD_POOL_NAME_IP_SHOWN + "}")
+    @Value("${" + ThreadConstant.THREAD_POOL_NAME_IP_SHOWN + ":true}")
     private boolean threadPoolNameIPShown;
 
-    @Value("${" + ThreadConstant.THREAD_POOL_CORE_POOL_SIZE + "}")
+    @Value("${" + ThreadConstant.THREAD_POOL_CORE_POOL_SIZE + ":4}")
     private int threadPoolCorePoolSize;
 
-    @Value("${" + ThreadConstant.THREAD_POOL_MAXIMUM_POOL_SIZE + "}")
+    @Value("${" + ThreadConstant.THREAD_POOL_MAXIMUM_POOL_SIZE + ":8}")
     private int threadPoolMaximumPoolSize;
 
-    @Value("${" + ThreadConstant.THREAD_POOL_KEEP_ALIVE_TIME + "}")
+    @Value("${" + ThreadConstant.THREAD_POOL_KEEP_ALIVE_TIME + ":900000}")
     private long threadPoolKeepAliveTime;
 
-    @Value("${" + ThreadConstant.THREAD_POOL_ALLOW_CORE_THREAD_TIMEOUT + "}")
+    @Value("${" + ThreadConstant.THREAD_POOL_ALLOW_CORE_THREAD_TIMEOUT + ":false}")
     private boolean threadPoolAllowCoreThreadTimeout;
 
-    @Value("${" + ThreadConstant.THREAD_POOL_QUEUE + "}")
+    @Value("${" + ThreadConstant.THREAD_POOL_QUEUE + ":LinkedBlockingQueue}")
     private String threadPoolQueue;
 
-    @Value("${" + ThreadConstant.THREAD_POOL_QUEUE_CAPACITY + "}")
+    @Value("${" + ThreadConstant.THREAD_POOL_QUEUE_CAPACITY + ":1024}")
     private int threadPoolQueueCapacity;
 
-    @Value("${" + ThreadConstant.THREAD_POOL_REJECTED_POLICY + "}")
+    @Value("${" + ThreadConstant.THREAD_POOL_REJECTED_POLICY + ":BlockingPolicyWithReport}")
     private String threadPoolRejectedPolicy;
 
     private volatile Map<String, ThreadPoolExecutor> threadPoolExecutorMap = new ConcurrentHashMap<String, ThreadPoolExecutor>();
