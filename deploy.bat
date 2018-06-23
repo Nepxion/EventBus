@@ -15,6 +15,6 @@
 @title Nepxion EventBus
 @color 0a
 
-call mvn clean deploy -DskipTests -e -P release -pl eventbus-aop -am
+call mvn clean deploy -DskipTests -e -P release -pl eventbus-aop-starter -am
 
 pause
