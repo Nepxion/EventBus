@@ -1,4 +1,4 @@
-package com.nepxion.eventbus.config;
+package com.nepxion.eventbus.configuration;
 
 /**
  * <p>Title: Nepxion Permission</p>
@@ -17,7 +17,7 @@ import com.nepxion.eventbus.core.EventControllerFactory;
 import com.nepxion.eventbus.thread.ThreadPoolFactory;
 
 @Configuration
-public class EventBusConfig {
+public class EventBusConfiguration {
     static {
         System.out.println("");
         System.out.println("╔═══╗        ╔╗╔══╗");
