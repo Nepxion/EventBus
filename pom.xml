@@ -12,7 +12,8 @@
 
     <modules>
         <module>eventbus-aop</module>
-        <module>eventbus-aop-spring-boot-example</module>
+        <module>eventbus-aop-starter</module>
+        <module>eventbus-spring-boot-example</module>
     </modules>
 
     <properties>
@@ -30,6 +31,12 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>eventbus-aop</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>eventbus-aop-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

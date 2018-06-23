@@ -17,7 +17,7 @@ import com.nepxion.eventbus.core.EventControllerFactory;
 import com.nepxion.eventbus.thread.ThreadPoolFactory;
 
 @Configuration
-public class EventBusConfiguration {
+public class EventBusAutoConfiguration {
     static {
         System.out.println("");
         System.out.println("╔═══╗        ╔╗╔══╗");
