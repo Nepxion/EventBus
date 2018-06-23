@@ -19,7 +19,7 @@ Nepxion EventBus是一款基于Google Guava通用事件派发机制的事件总�
 ```xml
 <dependency>
   <groupId>com.nepxion</groupId>
-  <artifactId>eventbus-aop</artifactId>
+  <artifactId>eventbus-aop-starter</artifactId>
   <version>${eventbus.version}</version>
 </dependency>
 ```
