@@ -23,12 +23,13 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.annotation.Value;
 
 import com.nepxion.eventbus.util.HostUtil;
 import com.nepxion.eventbus.util.StringUtil;
 
-public class ThreadPoolFactory {
+public class ThreadPoolFactory implements DisposableBean {
     private static final Logger LOG = LoggerFactory.getLogger(ThreadPoolFactory.class);
 
     @Value("${" + ThreadConstant.THREAD_POOL_MULTI_MODE + ":false}")
@@ -181,5 +182,22 @@ public class ThreadPoolFactory {
         }
 
         return null;
+    }
+
+    @Override
+    public void destroy() throws Exception {
+        LOG.info("Shutting down thread pool executors...");
+
+        if (threadPoolExecutor != null && !threadPoolExecutor.isShutdown()) {
+            threadPoolExecutor.shutdown();
+        }
+
+        for (Map.Entry<String, ThreadPoolExecutor> entry : threadPoolExecutorMap.entrySet()) {
+            ThreadPoolExecutor executor = entry.getValue();
+
+            if (executor != null && !executor.isShutdown()) {
+                executor.shutdown();
+            }
+        }
     }
 }
