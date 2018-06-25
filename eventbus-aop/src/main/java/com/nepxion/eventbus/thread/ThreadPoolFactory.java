@@ -196,7 +196,7 @@ public class ThreadPoolFactory implements DisposableBean {
             ThreadPoolExecutor executor = entry.getValue();
 
             if (executor != null && !executor.isShutdown()) {
-                LOG.info("Shutting down thread pool executor [{}]...", threadPoolExecutor);
+                LOG.info("Shutting down thread pool executor [{}] ...", threadPoolExecutor);
 
                 executor.shutdown();
             }
