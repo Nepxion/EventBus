@@ -33,7 +33,6 @@ public class EventControllerImpl implements EventController {
     @Override
     public void post(Object event) {
         eventBus.post(event);
-
     }
 
     @Override
