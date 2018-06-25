@@ -24,21 +24,21 @@ public class MySubscriber1 {
 
     @Subscribe
     public void subscribe(String event) {
-        LOG.info("主线程接收同步事件 - {}，String类型", event);
+        LOG.info("子线程接收异步事件 - {}，String类型", event);
     }
 
     @Subscribe
     public void subscribe(Long event) {
-        LOG.info("主线程接收同步事件 - {}，Long类型", event);
+        LOG.info("子线程接收异步事件 - {}，Long类型", event);
     }
 
     @Subscribe
     public void subscribe(Boolean event) {
-        LOG.info("主线程接收同步事件 - {}，Boolean类型", event);
+        LOG.info("子线程接收异步事件 - {}，Boolean类型", event);
     }
 
     @Subscribe
     public void subscribe(Event event) {
-        LOG.info("主线程接收同步事件 - {}，自定义类型", event);
+        LOG.info("子线程接收异步事件 - {}，内置类型Event", event);
     }
 }

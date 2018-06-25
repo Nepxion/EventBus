@@ -10,10 +10,11 @@ Nepxion EventBus是一款基于Google Guava通用事件派发机制的事件总�
 支持如下功能
 
     1. 实现基于@EventBus注解开启EventBus机制
-    2. 实现异步模式下(默认)，子线程中收到派发的事件
+    2. 实现异步模式下(默认)，子线程中收到派发的事件，基于@EventBus(async = false)，来切换是同步还是异步
     3. 实现批量派发事件
     4. 实现同步模式下，主线程中收到派发的事件
     5. 实现线程隔离技术，并定制化配置线程池
+    6. 实现事件对象的多元化，可以发布和订阅Java基本类型，也可以利用框架内置的Event类型，当然也可以使用任意自定义类型	
 
 ## 依赖
 ```xml
@@ -25,7 +26,7 @@ Nepxion EventBus是一款基于Google Guava通用事件派发机制的事件总�
 ```
 
 ## 配置
-线程池配置，参考application.properties
+线程池配置，参考application.properties，可以不需要配置，那么采取如下默认值
 ```java
 # Thread Pool Config
 # Multi thread pool，是否线程隔离，如果是那么每个不同类型的事件都会占用一个单独线程池，否则共享一个线程池
@@ -76,8 +77,23 @@ public class MySubscriber1 {
     private static final Logger LOG = LoggerFactory.getLogger(MySubscriber1.class);
 
     @Subscribe
+    public void subscribe(String event) {
+        LOG.info("子线程接收异步事件 - {}，String类型", event);
+    }
+
+    @Subscribe
+    public void subscribe(Long event) {
+        LOG.info("子线程接收异步事件 - {}，Long类型", event);
+    }
+
+    @Subscribe
+    public void subscribe(Boolean event) {
+        LOG.info("子线程接收异步事件 - {}，Boolean类型", event);
+    }
+
+    @Subscribe
     public void subscribe(Event event) {
-        LOG.info("主线程接收同步事件 - {}", event);
+        LOG.info("子线程接收异步事件 - {}，内置类型Event", event);
     }
 }
 ```
@@ -109,8 +125,23 @@ public class MySubscriber2 {
     private static final Logger LOG = LoggerFactory.getLogger(MySubscriber2.class);
 
     @Subscribe
+    public void subscribe(String event) {
+        LOG.info("主线程接收同步事件 - {}，String类型", event);
+    }
+
+    @Subscribe
+    public void subscribe(Long event) {
+        LOG.info("主线程接收同步事件 - {}，Long类型", event);
+    }
+
+    @Subscribe
+    public void subscribe(Boolean event) {
+        LOG.info("主线程接收同步事件 - {}，Boolean类型", event);
+    }
+
+    @Subscribe
     public void subscribe(Event event) {
-        LOG.info("子线程接收异步事件 - {}", event);
+        LOG.info("主线程接收同步事件 - {}，内置类型Event", event);
     }
 }
 ```
@@ -145,13 +176,27 @@ public class MyPublisher {
 
     public void publish() {
         LOG.info("发送事件...");
-        
+
         // 异步模式下(默认)，子线程中收到派发的事件
-        eventControllerFactory.getAsyncController().post(new Event("Async Event"));
+        eventControllerFactory.getAsyncController().post("Sync Event String Format");
 
         // 同步模式下，主线程中收到派发的事件
         // 事件派发接口中eventControllerFactory.getSyncController(identifier)必须和@EnableEventBus参数保持一致，否则会收不到事件
-        eventControllerFactory.getSyncController().post(new Event("Sync Event"));
+        eventControllerFactory.getSyncController().post("Sync Event String Format");
+
+        // 异步模式下(默认)，子线程中收到派发的事件
+        eventControllerFactory.getAsyncController().post(12345L);
+
+        // 同步模式下，主线程中收到派发的事件
+        // 事件派发接口中eventControllerFactory.getSyncController(identifier)必须和@EnableEventBus参数保持一致，否则会收不到事件
+        eventControllerFactory.getSyncController().post(Boolean.TRUE);
+
+        // 异步模式下(默认)，子线程中收到派发的事件
+        eventControllerFactory.getAsyncController().postEvent(new Event("Async Event"));
+
+        // 同步模式下，主线程中收到派发的事件
+        // 事件派发接口中eventControllerFactory.getSyncController(identifier)必须和@EnableEventBus参数保持一致，否则会收不到事件
+        eventControllerFactory.getSyncController().postEvent(new Event("Sync Event"));
     }
 }
 ```
@@ -184,4 +229,19 @@ public class MyApplication {
         myPublisher.publish();
     }
 }
+```
+
+运行结果
+```java
+2018-06-25 13:01:02.008 INFO [main][com.nepxion.eventbus.example.service.MyPublisher:28] - 发送事件...
+2018-06-25 13:01:02.015 INFO [EventBus-192.168.0.107-thread-0][com.nepxion.eventbus.example.service.MySubscriber1:27] - 子线程接收异步事件 - Sync Event String Format，String类型
+2018-06-25 13:01:02.016 INFO [main][com.nepxion.eventbus.example.service.MySubscriber2:27] - 主线程接收同步事件 - Sync Event String Format，String类型
+2018-06-25 13:01:02.016 INFO [main][com.nepxion.eventbus.example.service.MySubscriber2:37] - 主线程接收同步事件 - true，Boolean类型
+2018-06-25 13:01:02.016 INFO [EventBus-192.168.0.107-thread-1][com.nepxion.eventbus.example.service.MySubscriber1:32] - 子线程接收异步事件 - 12345，Long类型
+2018-06-25 13:01:02.017 INFO [EventBus-192.168.0.107-thread-2][com.nepxion.eventbus.example.service.MySubscriber1:42] - 子线程接收异步事件 - com.nepxion.eventbus.core.Event@67ca8c1f[
+  source=Async Event
+]，内置类型Event
+2018-06-25 13:01:02.017 INFO [main][com.nepxion.eventbus.example.service.MySubscriber2:42] - 主线程接收同步事件 - com.nepxion.eventbus.core.Event@1bcf67e8[
+  source=Sync Event
+]，内置类型Event
 ```
