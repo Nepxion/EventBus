@@ -15,8 +15,12 @@ public interface EventController {
     void register(Object object);
 
     void unregister(Object object);
+    
+    void post(Object event);
+    
+    void post(Collection<? extends Object> event);
+    
+    void postEvent(Event event);
 
-    void post(Event event);
-
-    void post(Collection<? extends Event> events);
+    void postEvent(Collection<? extends Event> events);
 }

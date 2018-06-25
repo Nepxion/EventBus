@@ -23,7 +23,22 @@ public class MySubscriber1 {
     private static final Logger LOG = LoggerFactory.getLogger(MySubscriber1.class);
 
     @Subscribe
+    public void subscribe(String event) {
+        LOG.info("主线程接收同步事件 - {}，String类型", event);
+    }
+
+    @Subscribe
+    public void subscribe(Long event) {
+        LOG.info("主线程接收同步事件 - {}，Long类型", event);
+    }
+
+    @Subscribe
+    public void subscribe(Boolean event) {
+        LOG.info("主线程接收同步事件 - {}，Boolean类型", event);
+    }
+
+    @Subscribe
     public void subscribe(Event event) {
-        LOG.info("主线程接收同步事件 - {}", event);
+        LOG.info("主线程接收同步事件 - {}，自定义类型", event);
     }
 }

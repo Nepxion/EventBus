@@ -31,14 +31,25 @@ public class EventControllerImpl implements EventController {
     }
 
     @Override
-    public void post(Event event) {
+    public void post(Object event) {
         eventBus.post(event);
+
     }
 
     @Override
-    public void post(Collection<? extends Event> events) {
-        for (Event event : events) {
+    public void post(Collection<? extends Object> events) {
+        for (Object event : events) {
             eventBus.post(event);
         }
+    }
+
+    @Override
+    public void postEvent(Event event) {
+        post(event);
+    }
+
+    @Override
+    public void postEvent(Collection<? extends Event> events) {
+        post(events);
     }
 }
