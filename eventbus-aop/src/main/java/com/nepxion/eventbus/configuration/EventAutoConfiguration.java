@@ -13,11 +13,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.nepxion.eventbus.aop.EventBeanPostProcessor;
+import com.nepxion.eventbus.context.EventContextClosedHandler;
 import com.nepxion.eventbus.core.EventControllerFactory;
 import com.nepxion.eventbus.thread.ThreadPoolFactory;
 
 @Configuration
-public class EventBusAutoConfiguration {
+public class EventAutoConfiguration {
     static {
         System.out.println("");
         System.out.println("╔═══╗        ╔╗╔══╗");
@@ -43,5 +44,10 @@ public class EventBusAutoConfiguration {
     @Bean
     public EventBeanPostProcessor eventBeanPostProcessor() {
         return new EventBeanPostProcessor();
+    }
+
+    @Bean
+    public EventContextClosedHandler eventContextClosedHandler() {
+        return new EventContextClosedHandler();
     }
 }
