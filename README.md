@@ -4,7 +4,7 @@
 [![Javadocs](http://www.javadoc.io/badge/com.nepxion/eventbus-aop.svg)](http://www.javadoc.io/doc/com.nepxion/eventbus-aop)
 [![Build Status](https://travis-ci.org/Nepxion/EventBus.svg?branch=master)](https://travis-ci.org/Nepxion/EventBus)
 
-Nepxion EventBus是一款基于Google Guava通用事件派发机制的事件总线组件，它采用Nepxion Matrix AOP框架进行切面架构，提供注解调用方式，支持异步和同步两种方式
+Nepxion EventBus是一款基于Google Guava通用事件派发机制的事件总线组件，它采用Spring framework AOP机制，提供注解调用方式，支持异步和同步两种方式
 
 ## 简介
 支持如下功能
