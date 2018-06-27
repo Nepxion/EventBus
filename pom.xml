@@ -6,7 +6,7 @@
     <name>Nepxion EventBus</name>
     <packaging>pom</packaging>
     <modelVersion>4.0.0</modelVersion>
-    <version>1.0.17</version>
+    <version>1.0.18</version>
     <description>Nepxion EventBus is a generic event dispatching component based on Google Guava with Nepxion Matrix AOP framework</description>
     <url>http://www.nepxion.com</url>
 
