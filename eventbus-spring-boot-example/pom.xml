@@ -11,7 +11,7 @@
     <parent>
         <groupId>com.nepxion</groupId>
         <artifactId>eventbus</artifactId>
-        <version>${revision}</version>
+        <version>1.0.17</version>
     </parent>
 
     <properties>
