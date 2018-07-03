@@ -29,7 +29,7 @@ The web application [ROOT] appears to have started a thread named [EventBus-192.
 */
 public class EventContextClosedHandler implements ApplicationListener<ContextClosedEvent> {
     @Autowired
-    ThreadPoolFactory threadPoolFactory;
+    private ThreadPoolFactory threadPoolFactory;
 
     @Override
     public void onApplicationEvent(ContextClosedEvent event) {
