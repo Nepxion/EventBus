@@ -27,7 +27,7 @@ public class EventAutoConfiguration {
         System.out.println("║╔══╣╚╝║║═╣╔╗╣║║╔═╗║║║║══╣");
         System.out.println("║╚══╬╗╔╣║═╣║║║╚╣╚═╝║╚╝╠══║");
         System.out.println("╚═══╝╚╝╚══╩╝╚╩═╩═══╩══╩══╝");
-        System.out.println("Nepxion EventBus  v1.0.21");
+        System.out.println("Nepxion EventBus  v2.0.0");
         System.out.println("");
     }
 
