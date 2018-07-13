@@ -14,6 +14,11 @@ Nepxion EventBus是一款基于Google Guava通用事件派发机制的事件总�
 - 实现线程隔离技术，并定制化配置线程池
 - 实现事件对象的多元化，可以发布和订阅Java基本类型，也可以利用框架内置的Event类型，当然也可以使用任意自定义类型	
 
+## 兼容
+最新版本兼容
+- Spring 4.x.x和Spring Boot 1.x.x
+- Spring 5.x.x和Spring Boot 2.x.x
+
 ## 依赖
 ```xml
 <dependency>
