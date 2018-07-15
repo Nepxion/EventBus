@@ -3,7 +3,7 @@
 [![Maven Central](https://img.shields.io/maven-central/v/com.nepxion/eventbus.svg?label=maven%20central)](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.nepxion%22%20AND%20eventbus)
 [![Javadocs](http://www.javadoc.io/badge/com.nepxion/eventbus-aop.svg)](http://www.javadoc.io/doc/com.nepxion/eventbus-aop)
 [![Build Status](https://travis-ci.org/Nepxion/EventBus.svg?branch=master)](https://travis-ci.org/Nepxion/EventBus)
-[![Code Beat](http://codebeat.co/badges/f6319552-793d-4150-9f8e-0d7745fd2995)](https://codebeat.co/projects/github-com-nepxion-eventbus-master)
+[![Code Beat](https://codebeat.co/badges/f6319552-793d-4150-9f8e-0d7745fd2995)](https://codebeat.co/projects/github-com-nepxion-eventbus-master)
 
 Nepxion EventBus是一款基于Google Guava通用事件派发机制的事件总线组件，它采用Spring framework AOP机制，提供注解调用方式，支持异步和同步两种方式
 
