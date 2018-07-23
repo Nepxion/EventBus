@@ -21,6 +21,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -64,8 +65,11 @@ public class ThreadPoolFactory {
 
     private ThreadPoolExecutor createSharedThreadPoolExecutor() {
         String threadPoolSharedName = threadCustomization.getThreadPoolSharedName();
-        String poolName = createThreadPoolName(threadPoolSharedName);
+        if (StringUtils.isEmpty(threadPoolSharedName)) {
+            threadPoolSharedName = ThreadCustomization.DEFAULT_THREADPOOL_SHARED_NAME;
+        }
 
+        String poolName = createThreadPoolName(threadPoolSharedName);
         if (threadPoolExecutor == null) {
             synchronized (ThreadPoolFactory.class) {
                 if (threadPoolExecutor == null) {
