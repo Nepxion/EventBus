@@ -1,4 +1,4 @@
-package com.nepxion.eventbus.thread;
+package com.nepxion.eventbus.thread.constant;
 
 /**
  * <p>Title: Nepxion EventBus</p>

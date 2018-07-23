@@ -1,4 +1,4 @@
-package com.nepxion.eventbus.thread;
+package com.nepxion.eventbus.thread.entity;
 
 /**
  * <p>Title: Nepxion EventBus</p>
@@ -15,6 +15,8 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+
+import com.nepxion.eventbus.thread.constant.ThreadConstant;
 
 public class ThreadCustomization implements Serializable {
     private static final long serialVersionUID = -927120657442228832L;

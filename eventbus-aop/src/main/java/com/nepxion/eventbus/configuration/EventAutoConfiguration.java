@@ -16,10 +16,10 @@ import org.springframework.context.annotation.Configuration;
 import com.nepxion.eventbus.aop.EventBeanPostProcessor;
 import com.nepxion.eventbus.context.EventContextClosedHandler;
 import com.nepxion.eventbus.core.EventControllerFactory;
-import com.nepxion.eventbus.thread.ThreadConstant;
-import com.nepxion.eventbus.thread.ThreadCustomization;
-import com.nepxion.eventbus.thread.ThreadParameter;
 import com.nepxion.eventbus.thread.ThreadPoolFactory;
+import com.nepxion.eventbus.thread.constant.ThreadConstant;
+import com.nepxion.eventbus.thread.entity.ThreadCustomization;
+import com.nepxion.eventbus.thread.entity.ThreadParameter;
 
 @Configuration
 public class EventAutoConfiguration {
