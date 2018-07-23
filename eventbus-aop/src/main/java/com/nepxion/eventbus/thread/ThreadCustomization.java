@@ -19,10 +19,8 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 public class ThreadCustomization implements Serializable {
     private static final long serialVersionUID = -927120657442228832L;
 
-    public static final String DEFAULT_THREADPOOL_SHARED_NAME = "Shared";
-
     private boolean threadPoolMultiMode = false;
-    private String threadPoolSharedName = DEFAULT_THREADPOOL_SHARED_NAME;
+    private String threadPoolSharedName = ThreadConstant.DEFAULT_THREADPOOL_SHARED_NAME;
     private boolean threadPoolNameCustomized = true;
     private boolean threadPoolNameIPShown = true;
 

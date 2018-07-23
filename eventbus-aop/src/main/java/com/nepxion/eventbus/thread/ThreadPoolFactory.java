@@ -66,7 +66,7 @@ public class ThreadPoolFactory {
     private ThreadPoolExecutor createSharedThreadPoolExecutor() {
         String threadPoolSharedName = threadCustomization.getThreadPoolSharedName();
         if (StringUtils.isEmpty(threadPoolSharedName)) {
-            threadPoolSharedName = ThreadCustomization.DEFAULT_THREADPOOL_SHARED_NAME;
+            threadPoolSharedName = ThreadConstant.DEFAULT_THREADPOOL_SHARED_NAME;
         }
 
         String poolName = createThreadPoolName(threadPoolSharedName);

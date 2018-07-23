@@ -23,4 +23,6 @@ public class ThreadConstant {
     public static final String THREAD_POOL_QUEUE = "threadpool.queue";
     public static final String THREAD_POOL_QUEUE_CAPACITY = "threadpool.queue.capacity";
     public static final String THREAD_POOL_REJECTED_POLICY = "threadpool.rejected.policy";
+
+    public static final String DEFAULT_THREADPOOL_SHARED_NAME = "SharedThreadPool";
 }
