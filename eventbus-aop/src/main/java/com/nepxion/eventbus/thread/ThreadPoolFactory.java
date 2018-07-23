@@ -32,7 +32,6 @@ public class ThreadPoolFactory {
     private static final Logger LOG = LoggerFactory.getLogger(ThreadPoolFactory.class);
 
     private volatile Map<String, ThreadPoolExecutor> threadPoolExecutorMap = new ConcurrentHashMap<String, ThreadPoolExecutor>();
-
     private ThreadPoolExecutor threadPoolExecutor;
 
     private ThreadCustomization threadCustomization;
