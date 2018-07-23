@@ -23,52 +23,27 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 
-import com.nepxion.eventbus.util.HostUtil;
+import com.nepxion.eventbus.util.NetUtil;
 import com.nepxion.eventbus.util.StringUtil;
 
 public class ThreadPoolFactory {
     private static final Logger LOG = LoggerFactory.getLogger(ThreadPoolFactory.class);
 
-    @Value("${" + ThreadConstant.THREAD_POOL_MULTI_MODE + ":false}")
-    private boolean threadPoolMultiMode;
-
-    @Value("${" + ThreadConstant.THREAD_POOL_SHARED_NAME + ":EventBus}")
-    private String threadPoolSharedName;
-
-    @Value("${" + ThreadConstant.THREAD_POOL_NAME_CUSTOMIZED + ":true}")
-    private boolean threadPoolNameCustomized;
-
-    @Value("${" + ThreadConstant.THREAD_POOL_NAME_IP_SHOWN + ":true}")
-    private boolean threadPoolNameIPShown;
-
-    @Value("${" + ThreadConstant.THREAD_POOL_CORE_POOL_SIZE + ":4}")
-    private int threadPoolCorePoolSize;
-
-    @Value("${" + ThreadConstant.THREAD_POOL_MAXIMUM_POOL_SIZE + ":8}")
-    private int threadPoolMaximumPoolSize;
-
-    @Value("${" + ThreadConstant.THREAD_POOL_KEEP_ALIVE_TIME + ":900000}")
-    private long threadPoolKeepAliveTime;
-
-    @Value("${" + ThreadConstant.THREAD_POOL_ALLOW_CORE_THREAD_TIMEOUT + ":false}")
-    private boolean threadPoolAllowCoreThreadTimeout;
-
-    @Value("${" + ThreadConstant.THREAD_POOL_QUEUE + ":LinkedBlockingQueue}")
-    private String threadPoolQueue;
-
-    @Value("${" + ThreadConstant.THREAD_POOL_QUEUE_CAPACITY + ":1024}")
-    private int threadPoolQueueCapacity;
-
-    @Value("${" + ThreadConstant.THREAD_POOL_REJECTED_POLICY + ":BlockingPolicyWithReport}")
-    private String threadPoolRejectedPolicy;
-
     private volatile Map<String, ThreadPoolExecutor> threadPoolExecutorMap = new ConcurrentHashMap<String, ThreadPoolExecutor>();
 
     private ThreadPoolExecutor threadPoolExecutor;
 
+    private ThreadCustomization threadCustomization;
+    private ThreadParameter threadParameter;
+
+    public ThreadPoolFactory(ThreadCustomization threadCustomization, ThreadParameter threadParameter) {
+        this.threadCustomization = threadCustomization;
+        this.threadParameter = threadParameter;
+    }
+
     public ThreadPoolExecutor getThreadPoolExecutor(String threadPoolName) {
+        boolean threadPoolMultiMode = threadCustomization.isThreadPoolMultiMode();
         String poolName = createThreadPoolName(threadPoolName);
 
         if (threadPoolMultiMode) {
@@ -88,6 +63,7 @@ public class ThreadPoolFactory {
     }
 
     private ThreadPoolExecutor createSharedThreadPoolExecutor() {
+        String threadPoolSharedName = threadCustomization.getThreadPoolSharedName();
         String poolName = createThreadPoolName(threadPoolSharedName);
 
         if (threadPoolExecutor == null) {
@@ -102,17 +78,27 @@ public class ThreadPoolFactory {
     }
 
     private String createThreadPoolName(String threadPoolName) {
-        return threadPoolNameIPShown ? StringUtil.firstLetterToUpper(threadPoolName) + "-" + HostUtil.getLocalhost() + "-thread" : StringUtil.firstLetterToUpper(threadPoolName) + "-thread";
+        boolean threadPoolNameIPShown = threadCustomization.isThreadPoolNameIPShown();
+
+        return threadPoolNameIPShown ? StringUtil.firstLetterToUpper(threadPoolName) + "-" + NetUtil.getLocalHost() + "-thread" : StringUtil.firstLetterToUpper(threadPoolName) + "-thread";
     }
 
     private ThreadPoolExecutor createThreadPoolExecutor(String threadPoolName) {
-        return threadPoolNameCustomized ?
-                createThreadPoolExecutor(threadPoolName, threadPoolCorePoolSize, threadPoolMaximumPoolSize, threadPoolKeepAliveTime, threadPoolAllowCoreThreadTimeout, threadPoolQueue, threadPoolQueueCapacity, threadPoolRejectedPolicy) :
-                createThreadPoolExecutor(threadPoolCorePoolSize, threadPoolMaximumPoolSize, threadPoolKeepAliveTime, threadPoolAllowCoreThreadTimeout, threadPoolQueue, threadPoolQueueCapacity, threadPoolRejectedPolicy);
+        boolean threadPoolNameCustomized = threadCustomization.isThreadPoolNameCustomized();
+
+        return threadPoolNameCustomized ? createThreadPoolExecutor(threadPoolName, threadParameter) : createThreadPoolExecutor(threadParameter);
     }
 
-    public static ThreadPoolExecutor createThreadPoolExecutor(String threadPoolName, int corePoolSize, int maximumPoolSize, long keepAliveTime, boolean allowCoreThreadTimeout, String queue, int queueCapacity, String rejectedPolicy) {
-        LOG.info("Thread pool executor is created, threadPoolName={}, corePoolSize={}, maximumPoolSize={}, keepAliveTime={}, allowCoreThreadTimeout={}, queue={}, queueCapacity={}, rejectedPolicy={}", threadPoolName, corePoolSize, maximumPoolSize, keepAliveTime, allowCoreThreadTimeout, queue, queueCapacity, rejectedPolicy);
+    public static ThreadPoolExecutor createThreadPoolExecutor(String threadPoolName, ThreadParameter threadParameter) {
+        int corePoolSize = threadParameter.getThreadPoolCorePoolSize();
+        int maximumPoolSize = threadParameter.getThreadPoolMaximumPoolSize();
+        long keepAliveTime = threadParameter.getThreadPoolKeepAliveTime();
+        boolean allowCoreThreadTimeout = threadParameter.isThreadPoolAllowCoreThreadTimeout();
+        String queue = threadParameter.getThreadPoolQueue();
+        int queueCapacity = threadParameter.getThreadPoolQueueCapacity();
+        String rejectedPolicy = threadParameter.getThreadPoolRejectedPolicy();
+
+        LOG.info("Thread pool executor is created, threadPoolName={}, threadParameter={}", threadPoolName, threadParameter);
 
         ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(corePoolSize,
                 maximumPoolSize,
@@ -133,8 +119,16 @@ public class ThreadPoolFactory {
         return threadPoolExecutor;
     }
 
-    public static ThreadPoolExecutor createThreadPoolExecutor(int corePoolSize, int maximumPoolSize, long keepAliveTime, boolean allowCoreThreadTimeout, String queue, int queueCapacity, String rejectedPolicy) {
-        LOG.info("Thread pool executor is created, corePoolSize={}, maximumPoolSize={}, keepAliveTime={}, allowCoreThreadTimeout={}, queue={}, queueCapacity={}, rejectedPolicy={}", corePoolSize, maximumPoolSize, keepAliveTime, allowCoreThreadTimeout, queue, queueCapacity, rejectedPolicy);
+    public static ThreadPoolExecutor createThreadPoolExecutor(ThreadParameter threadParameter) {
+        int corePoolSize = threadParameter.getThreadPoolCorePoolSize();
+        int maximumPoolSize = threadParameter.getThreadPoolMaximumPoolSize();
+        long keepAliveTime = threadParameter.getThreadPoolKeepAliveTime();
+        boolean allowCoreThreadTimeout = threadParameter.isThreadPoolAllowCoreThreadTimeout();
+        String queue = threadParameter.getThreadPoolQueue();
+        int queueCapacity = threadParameter.getThreadPoolQueueCapacity();
+        String rejectedPolicy = threadParameter.getThreadPoolRejectedPolicy();
+
+        LOG.info("Thread pool executor is created, threadParameter={}", threadParameter);
 
         ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(corePoolSize,
                 maximumPoolSize,
