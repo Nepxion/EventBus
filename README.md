@@ -28,11 +28,45 @@ Nepxion EventBus是一款基于Google Guava通用事件派发机制的事件总�
 </dependency>
 ```
 
-## 配置
+## 策略
+- EventBus事件控制器（Controller）策略
+  - 可以由单个Controller控制缺省identifier的EventBus事件（在Google Guava内部定义缺省identifier的值为'default'）。用法如下：
+```java
+事件发布端：
+eventControllerFactory.getAsyncController().post("abc"); // 异步发送
+eventControllerFactory.getSyncController().post("abc"); // 同步发送
+```  
+```java
+事件订阅端：
+@EventBus // 订阅异步消息，async不指定，默认为true
+public class MySubscriber {
+}
+@EventBus(async = false) // 订阅同步消息
+public class MySubscriber {
+}
+```  
+  - 可以由多个Controller控制不同identifier的EventBus事件。用法如下：
+```java
+事件发布端：
+eventControllerFactory.getAsyncController(identifier).post("abc"); // 异步发送
+eventControllerFactory.getSyncController(identifier).post("abc"); // 同步发送
+```  
+```java
+事件订阅端：
+@EventBus(identifier = "xyz") // 订阅异步消息，async不指定，默认为true
+public class MySubscriber {
+}
+@EventBus(identifier = "xyz", async = false) // 订阅同步消息
+public class MySubscriber {
+}
+```
+>注意：事件发布端和订阅端的identifier一定要一致
+- EventBus线程池（ThreadPool）策略
+  - 配置如下：
 线程池配置，参考application.properties，可以不需要配置，那么采取如下默认值
 ```java
 # Thread Pool Config
-# Multi thread pool，是否线程隔离，如果是那么每个不同类型的事件都会占用一个单独线程池，否则共享一个线程池
+# Multi thread pool，是否线程隔离。如果是，那么每个不同identifier的事件都会占用一个单独线程池，否则共享一个线程池
 threadPoolMultiMode=false
 # 共享线程池的名称
 threadPoolSharedName=EventBus
