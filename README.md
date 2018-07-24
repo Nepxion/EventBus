@@ -9,7 +9,7 @@ Nepxion EventBus是一款基于Google Guava通用事件派发机制的事件总�
 ## 请联系我
 - 请加微信群或者微信
 
-![Alt text](https://github.com/Nepxion/Docs/blob/master/zxing-doc/微信群-1.jpg) ![Alt text](https://github.com/Nepxion/Docs/blob/master/zxing-doc/微信-1.jpg)  
+![Alt text](https://github.com/Nepxion/Docs/blob/master/zxing-doc/微信群-1.jpg) ![Alt text](https://github.com/Nepxion/Docs/blob/master/zxing-doc/微信-1.jpg)
 
 ## 简介
 - 实现基于@EventBus注解开启EventBus机制
