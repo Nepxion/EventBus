@@ -77,16 +77,16 @@ threadPoolMultiMode=false
 threadPoolSharedName=EventBus
 # 是否显示自定义的线程池名
 threadPoolNameCustomized=true
+# CPU unit（CPU核数单位，例如在8核心CPU上，threadPoolCorePoolSize配置为2，那么最终核心线程数为16，下同）
+threadPoolCorePoolSize=1
 # CPU unit
-threadPoolCorePoolSize=4
-# CPU unit
-threadPoolMaximumPoolSize=8
+threadPoolMaximumPoolSize=2
 threadPoolKeepAliveTime=900000
 threadPoolAllowCoreThreadTimeout=false
 # LinkedBlockingQueue, ArrayBlockingQueue, SynchronousQueue
 threadPoolQueue=LinkedBlockingQueue
 # CPU unit (Used for LinkedBlockingQueue or ArrayBlockingQueue)
-threadPoolQueueCapacity=1024
+threadPoolQueueCapacity=128
 # BlockingPolicyWithReport, CallerRunsPolicyWithReport, AbortPolicyWithReport, RejectedPolicyWithReport, DiscardedPolicyWithReport
 threadPoolRejectedPolicy=BlockingPolicyWithReport
 ```
