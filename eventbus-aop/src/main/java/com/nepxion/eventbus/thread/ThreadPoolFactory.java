@@ -157,13 +157,11 @@ public class ThreadPoolFactory {
     private static BlockingQueue<Runnable> createBlockingQueue(String queue, int queueCapacity) {
         ThreadQueueType queueType = ThreadQueueType.fromString(queue);
 
-        int capacity = ThreadConstant.CPUS * queueCapacity;
-
         switch (queueType) {
             case LINKED_BLOCKING_QUEUE:
-                return new LinkedBlockingQueue<Runnable>(capacity);
+                return new LinkedBlockingQueue<Runnable>(queueCapacity);
             case ARRAY_BLOCKING_QUEUE:
-                return new ArrayBlockingQueue<Runnable>(capacity);
+                return new ArrayBlockingQueue<Runnable>(queueCapacity);
             case SYNCHRONOUS_QUEUE:
                 return new SynchronousQueue<Runnable>();
         }

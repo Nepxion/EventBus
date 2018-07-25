@@ -16,15 +16,17 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+import com.nepxion.eventbus.thread.constant.ThreadConstant;
+
 public class ThreadParameter implements Serializable {
     private static final long serialVersionUID = 6869706244434951605L;
 
-    private int threadPoolCorePoolSize = 4;
-    private int threadPoolMaximumPoolSize = 8;
+    private int threadPoolCorePoolSize = ThreadConstant.CPUS * 1;
+    private int threadPoolMaximumPoolSize = ThreadConstant.CPUS * 2;
     private long threadPoolKeepAliveTime = 900000;
     private boolean threadPoolAllowCoreThreadTimeout = false;
     private String threadPoolQueue = "LinkedBlockingQueue";
-    private int threadPoolQueueCapacity = 1024;
+    private int threadPoolQueueCapacity = ThreadConstant.CPUS * 128;
     private String threadPoolRejectedPolicy = "BlockingPolicyWithReport";
 
     public int getThreadPoolCorePoolSize() {
@@ -32,7 +34,7 @@ public class ThreadParameter implements Serializable {
     }
 
     public void setThreadPoolCorePoolSize(int threadPoolCorePoolSize) {
-        this.threadPoolCorePoolSize = threadPoolCorePoolSize;
+        this.threadPoolCorePoolSize = ThreadConstant.CPUS * threadPoolCorePoolSize;
     }
 
     public int getThreadPoolMaximumPoolSize() {
@@ -40,7 +42,7 @@ public class ThreadParameter implements Serializable {
     }
 
     public void setThreadPoolMaximumPoolSize(int threadPoolMaximumPoolSize) {
-        this.threadPoolMaximumPoolSize = threadPoolMaximumPoolSize;
+        this.threadPoolMaximumPoolSize = ThreadConstant.CPUS * threadPoolMaximumPoolSize;
     }
 
     public long getThreadPoolKeepAliveTime() {
@@ -72,7 +74,7 @@ public class ThreadParameter implements Serializable {
     }
 
     public void setThreadPoolQueueCapacity(int threadPoolQueueCapacity) {
-        this.threadPoolQueueCapacity = threadPoolQueueCapacity;
+        this.threadPoolQueueCapacity = ThreadConstant.CPUS * threadPoolQueueCapacity;
     }
 
     public String getThreadPoolRejectedPolicy() {
