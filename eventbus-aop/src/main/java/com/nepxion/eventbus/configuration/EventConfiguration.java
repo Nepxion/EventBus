@@ -22,7 +22,7 @@ import com.nepxion.eventbus.thread.entity.ThreadCustomization;
 import com.nepxion.eventbus.thread.entity.ThreadParameter;
 
 @Configuration
-public class EventAutoConfiguration {
+public class EventConfiguration {
     static {
         System.out.println("");
         System.out.println("╔═══╗        ╔╗╔══╗");

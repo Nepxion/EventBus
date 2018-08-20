@@ -13,9 +13,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
+import com.nepxion.eventbus.annotation.EnableEventBus;
 import com.nepxion.eventbus.example.service.MyPublisher;
 
 @SpringBootApplication
+@EnableEventBus
 public class MyApplication {
     public static void main(String[] args) throws Exception {
         ConfigurableApplicationContext applicationContext = SpringApplication.run(MyApplication.class, args);

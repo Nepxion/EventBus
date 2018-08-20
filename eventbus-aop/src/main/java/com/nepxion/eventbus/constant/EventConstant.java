@@ -10,5 +10,7 @@ package com.nepxion.eventbus.constant;
  */
 
 public class EventConstant {
+    public static final String EVENTBUS_ENABLED = "eventbus.enabled";
+
     public static final String SHARED_CONTROLLER = "SharedController";
 }

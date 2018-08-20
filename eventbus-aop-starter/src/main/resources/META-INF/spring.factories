@@ -1,3 +1,2 @@
-# Auto Configure
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.nepxion.eventbus.configuration.EventAutoConfiguration
+com.nepxion.eventbus.annotation.EnableEventBus=\
+com.nepxion.eventbus.configuration.EventConfiguration
