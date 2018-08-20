@@ -38,6 +38,14 @@ Nepxion EventBus是一款基于Google Guava通用事件派发机制的事件总�
 </dependency>
 ```
 
+## 用法
+```java
+@SpringBootApplication
+@EnableEventBus
+public class MyApplication {
+}
+```
+
 ## 策略
 - EventBus事件控制器（Controller）策略
   - 可以由单个Controller控制缺省identifier的EventBus事件（在Google Guava内部定义缺省identifier的值为'default'）。用法如下：
@@ -45,7 +53,7 @@ Nepxion EventBus是一款基于Google Guava通用事件派发机制的事件总�
 事件发布端：
 eventControllerFactory.getAsyncController().post("abc"); // 异步发送
 eventControllerFactory.getSyncController().post("abc"); // 同步发送
-```  
+```
 ```java
 事件订阅端：
 @EventBus // 订阅异步消息，async不指定，默认为true
@@ -71,6 +79,12 @@ public class MySubscriber {
 }
 ```
 >注意：事件发布端和订阅端的identifier一定要一致
+```java
+# EventBus config
+# 开关配置，结合注解@EnableEventBus使用
+# eventbus.enabled=true
+```
+
 - EventBus线程池（ThreadPool）策略
   - 配置如下：
 线程池配置，参考application.properties，可以不需要配置，那么采取如下默认值
@@ -265,9 +279,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
+import com.nepxion.eventbus.annotation.EnableEventBus;
 import com.nepxion.eventbus.example.service.MyPublisher;
 
 @SpringBootApplication
+@EnableEventBus
 public class MyApplication {
     public static void main(String[] args) throws Exception {
         ConfigurableApplicationContext applicationContext = SpringApplication.run(MyApplication.class, args);
