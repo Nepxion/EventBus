@@ -31,7 +31,7 @@ public class EventConfiguration {
         System.out.println("║╔══╣╚╝║║═╣╔╗╣║║╔═╗║║║║══╣");
         System.out.println("║╚══╬╗╔╣║═╣║║║╚╣╚═╝║╚╝╠══║");
         System.out.println("╚═══╝╚╝╚══╩╝╚╩═╩═══╩══╩══╝");
-        System.out.println("Nepxion EventBus  v2.0.2");
+        System.out.println("Nepxion EventBus  v2.0.3");
         System.out.println("");
     }
 
