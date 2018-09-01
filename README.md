@@ -6,7 +6,6 @@
 [![Build Status](https://travis-ci.org/Nepxion/EventBus.svg?branch=master)](https://travis-ci.org/Nepxion/EventBus)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/cee72965ac43443987e77e0ee24c15f3)](https://www.codacy.com/project/HaojunRen/EventBus/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Nepxion/EventBus&amp;utm_campaign=Badge_Grade_Dashboard)
 
-
 Nepxion EventBus是一款基于Google Guava通用事件派发机制的事件总线组件，它采用Spring framework AOP机制，提供注解调用方式，支持异步和同步两种方式
 
 ## 请联系我
