@@ -28,10 +28,6 @@ public final class EventControllerFactory {
     private volatile Map<String, EventController> syncControllerMap = new ConcurrentHashMap<String, EventController>();
     private volatile Map<String, EventController> asyncControllerMap = new ConcurrentHashMap<String, EventController>();
 
-    public EventControllerFactory() {
-
-    }
-
     public EventController getAsyncController() {
         return getAsyncController(EventConstant.SHARED_CONTROLLER);
     }
