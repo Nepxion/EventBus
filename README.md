@@ -10,7 +10,7 @@ Nepxion EventBus是一款基于Google Guava通用事件派发机制的事件总�
 
 ## 请联系我
 ![Alt text](https://github.com/Nepxion/Docs/blob/master/zxing-doc/微信-1.jpg)
-
+ 
 ## 简介
 - 实现基于@EventBus注解开启EventBus机制
 - 实现异步模式下(默认)，子线程中收到派发的事件，基于@EventBus(async = false)，来切换是同步还是异步
