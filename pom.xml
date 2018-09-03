@@ -20,7 +20,7 @@
         <matrix.version>2.0.1</matrix.version>
         <commons.lang3.version>3.6</commons.lang3.version>
         <spring.version>4.3.18.RELEASE</spring.version>
-        <guava.version>25.1-jre</guava.version>
+        <guava.version>26.0-jre</guava.version>
         <disruptor.version>3.3.7</disruptor.version>
         <log4j.version>2.9.1</log4j.version>
         <java.version>1.8</java.version>
@@ -64,6 +64,7 @@
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>${guava.version}</version>
+                <scope>provided</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
