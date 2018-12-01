@@ -17,9 +17,9 @@
     </modules>
 
     <properties>
-        <matrix.version>2.0.2</matrix.version>
+        <matrix.version>2.0.3</matrix.version>
         <commons.lang3.version>3.6</commons.lang3.version>
-        <spring.version>4.3.20.RELEASE</spring.version>
+        <spring.version>5.0.11.RELEASE</spring.version>
         <guava.version>27.0-jre</guava.version>
         <disruptor.version>3.3.7</disruptor.version>
         <log4j.version>2.9.1</log4j.version>
