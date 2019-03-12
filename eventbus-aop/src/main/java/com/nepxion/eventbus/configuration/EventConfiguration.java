@@ -24,15 +24,18 @@ import com.nepxion.eventbus.thread.entity.ThreadParameter;
 @Configuration
 public class EventConfiguration {
     static {
-        System.out.println("");
-        System.out.println("╔═══╗        ╔╗╔══╗");
-        System.out.println("║╔══╝       ╔╝╚╣╔╗║");
-        System.out.println("║╚══╦╗╔╦══╦═╬╗╔╣╚╝╚╦╗╔╦══╗");
-        System.out.println("║╔══╣╚╝║║═╣╔╗╣║║╔═╗║║║║══╣");
-        System.out.println("║╚══╬╗╔╣║═╣║║║╚╣╚═╝║╚╝╠══║");
-        System.out.println("╚═══╝╚╝╚══╩╝╚╩═╩═══╩══╩══╝");
-        System.out.println("Nepxion EventBus  v2.0.8");
-        System.out.println("");
+        String logoShown = System.getProperty("nepxion.logo.shown", "true");
+        if (Boolean.valueOf(logoShown)) {
+            System.out.println("");
+            System.out.println("╔═══╗        ╔╗╔══╗");
+            System.out.println("║╔══╝       ╔╝╚╣╔╗║");
+            System.out.println("║╚══╦╗╔╦══╦═╬╗╔╣╚╝╚╦╗╔╦══╗");
+            System.out.println("║╔══╣╚╝║║═╣╔╗╣║║╔═╗║║║║══╣");
+            System.out.println("║╚══╬╗╔╣║═╣║║║╚╣╚═╝║╚╝╠══║");
+            System.out.println("╚═══╝╚╝╚══╩╝╚╩═╩═══╩══╩══╝");
+            System.out.println("Nepxion EventBus  v2.0.9");
+            System.out.println("");
+        }
     }
 
     @Value("${" + ThreadConstant.THREAD_POOL_MULTI_MODE + ":false}")
