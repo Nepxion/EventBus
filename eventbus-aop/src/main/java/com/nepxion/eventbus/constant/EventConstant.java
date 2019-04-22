@@ -10,7 +10,7 @@ package com.nepxion.eventbus.constant;
  */
 
 public class EventConstant {
-    public static final String EVENTBUS_VERSION = "2.0.10";
+    public static final String EVENTBUS_VERSION = "2.0.11";
 
     public static final String EVENTBUS_ENABLED = "eventbus.enabled";
 
