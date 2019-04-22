@@ -17,7 +17,8 @@
     </modules>
 
     <properties>
-        <matrix.version>2.0.5</matrix.version>
+        <matrix.version>2.0.7</matrix.version>
+        <banner.version>1.0.2</banner.version>
         <commons.lang3.version>3.6</commons.lang3.version>
         <spring.version>5.0.11.RELEASE</spring.version>
         <guava.version>27.0-jre</guava.version>
@@ -45,6 +46,12 @@
                 <groupId>${project.groupId}</groupId>
                 <artifactId>matrix-aop-starter</artifactId>
                 <version>${matrix.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>banner</artifactId>
+                <version>${banner.version}</version>
             </dependency>
 
             <dependency>

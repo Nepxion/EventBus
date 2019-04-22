@@ -13,19 +13,25 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.nepxion.banner.BannerConstant;
+import com.nepxion.banner.Description;
+import com.nepxion.banner.LogoBanner;
+import com.nepxion.banner.NepxionBanner;
 import com.nepxion.eventbus.aop.EventBeanPostProcessor;
+import com.nepxion.eventbus.constant.EventConstant;
 import com.nepxion.eventbus.context.EventContextClosedHandler;
 import com.nepxion.eventbus.core.EventControllerFactory;
 import com.nepxion.eventbus.thread.ThreadPoolFactory;
 import com.nepxion.eventbus.thread.constant.ThreadConstant;
 import com.nepxion.eventbus.thread.entity.ThreadCustomization;
 import com.nepxion.eventbus.thread.entity.ThreadParameter;
+import com.taobao.text.Color;
 
 @Configuration
 public class EventConfiguration {
     static {
-        String logoShown = System.getProperty("nepxion.logo.shown", "true");
-        if (Boolean.valueOf(logoShown)) {
+        /*String bannerShown = System.getProperty(BannerConstant.BANNER_SHOWN, "true");
+        if (Boolean.valueOf(bannerShown)) {
             System.out.println("");
             System.out.println("╔═══╗        ╔╗╔══╗");
             System.out.println("║╔══╝       ╔╝╚╣╔╗║");
@@ -33,9 +39,13 @@ public class EventConfiguration {
             System.out.println("║╔══╣╚╝║║═╣╔╗╣║║╔═╗║║║║══╣");
             System.out.println("║╚══╬╗╔╣║═╣║║║╚╣╚═╝║╚╝╠══║");
             System.out.println("╚═══╝╚╝╚══╩╝╚╩═╩═══╩══╩══╝");
-            System.out.println("Nepxion EventBus  v2.0.10");
+            System.out.println("Nepxion EventBus  v" + EventConstant.EVENTBUS_VERSION);
             System.out.println("");
-        }
+        }*/
+
+        LogoBanner logoBanner = new LogoBanner(EventConfiguration.class, "/com/nepxion/eventbus/resource/logo.txt", "Welcome to Nepxion", 8, 5, new Color[] { Color.red, Color.green, Color.cyan, Color.blue, Color.yellow, Color.magenta, Color.red, Color.green }, true);
+
+        NepxionBanner.show(logoBanner, new Description(BannerConstant.VERSION + ":", EventConstant.EVENTBUS_VERSION, 0, 1), new Description(BannerConstant.GITHUB + ":", BannerConstant.NEPXION_GITHUB + "/EventBus", 0, 1));
     }
 
     @Value("${" + ThreadConstant.THREAD_POOL_MULTI_MODE + ":false}")
