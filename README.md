@@ -3,7 +3,7 @@
 
 Nepxion EventBus是一款基于Google Guava通用事件派发机制的事件总线组件。它采用Spring Framework AOP机制，提供注解调用方式，支持异步和同步两种方式
 
-## 请联系我
+## 请联系我 
 微信和公众号
 
 ![Alt text](https://github.com/HaojunRen/Docs/raw/master/zxing-doc/微信-1.jpg)![Alt text](https://github.com/HaojunRen/Docs/raw/master/zxing-doc/公众号-1.jpg)
