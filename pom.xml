@@ -17,13 +17,11 @@
     </modules>
 
     <properties>
-        <matrix.version>2.0.7</matrix.version>
+        <matrix.version>2.0.8</matrix.version>
         <banner.version>1.0.2</banner.version>
         <commons.lang3.version>3.6</commons.lang3.version>
         <spring.version>5.0.11.RELEASE</spring.version>
-        <guava.version>28.1-jre</guava.version>
-        <disruptor.version>3.3.7</disruptor.version>
-        <log4j.version>2.9.1</log4j.version>
+        <guava.version>29.0-jre</guava.version>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
@@ -75,29 +73,6 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
-    <dependencies>
-        <dependency>
-            <groupId>com.lmax</groupId>
-            <artifactId>disruptor</artifactId>
-            <version>${disruptor.version}</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-1.2-api</artifactId>
-            <version>${log4j.version}</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-slf4j-impl</artifactId>
-            <version>${log4j.version}</version>
-            <scope>provided</scope>
-        </dependency>
-    </dependencies>
 
     <build>
         <plugins>
