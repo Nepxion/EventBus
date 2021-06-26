@@ -39,13 +39,15 @@ public class MyApplication {
 - EventBus事件控制器（Controller）策略
 
 ① 可以由单个Controller控制缺省identifier的EventBus事件（在Google Guava内部定义缺省identifier的值为'default'）。用法如下：
+
+事件发布端
 ```
-事件发布端：
 eventControllerFactory.getAsyncController().post("abc"); // 异步发送
 eventControllerFactory.getSyncController().post("abc"); // 同步发送
 ```
+
+事件订阅端
 ```java
-事件订阅端：
 @EventBus // 订阅异步消息，async不指定，默认为true
 public class MySubscriber {
 }
@@ -55,13 +57,15 @@ public class MySubscriber {
 ```
  
 ② 可以由多个Controller控制不同identifier的EventBus事件。用法如下：
+
+事件发布端
 ```java
-事件发布端：
 eventControllerFactory.getAsyncController(identifier).post("abc"); // 异步发送
 eventControllerFactory.getSyncController(identifier).post("abc"); // 同步发送
-```  
+```
+
+事件订阅端
 ```java
-事件订阅端：
 @EventBus(identifier = "xyz") // 订阅异步消息，async不指定，默认为true
 public class MySubscriber {
 }
@@ -69,7 +73,8 @@ public class MySubscriber {
 public class MySubscriber {
 }
 ```
->注意：事件发布端和订阅端的identifier一定要一致
+
+> 注意：事件发布端和订阅端的identifier一定要一致
 ```
 # EventBus config
 # 开关配置，结合注解@EnableEventBus使用
@@ -79,6 +84,7 @@ public class MySubscriber {
 - EventBus线程池（ThreadPool）策略
 
 ① 配置如下：
+
 线程池配置，参考application.properties，可以不需要配置，那么采取如下默认值
 ```
 # Thread Pool Config
