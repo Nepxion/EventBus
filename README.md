@@ -37,8 +37,9 @@ public class MyApplication {
 
 ## 策略
 - EventBus事件控制器（Controller）策略
-  - 可以由单个Controller控制缺省identifier的EventBus事件（在Google Guava内部定义缺省identifier的值为'default'）。用法如下：
-```java
+
+① 可以由单个Controller控制缺省identifier的EventBus事件（在Google Guava内部定义缺省identifier的值为'default'）。用法如下：
+```
 事件发布端：
 eventControllerFactory.getAsyncController().post("abc"); // 异步发送
 eventControllerFactory.getSyncController().post("abc"); // 同步发送
@@ -51,8 +52,9 @@ public class MySubscriber {
 @EventBus(async = false) // 订阅同步消息
 public class MySubscriber {
 }
-```  
-  - 可以由多个Controller控制不同identifier的EventBus事件。用法如下：
+```
+ 
+② 可以由多个Controller控制不同identifier的EventBus事件。用法如下：
 ```java
 事件发布端：
 eventControllerFactory.getAsyncController(identifier).post("abc"); // 异步发送
@@ -68,16 +70,17 @@ public class MySubscriber {
 }
 ```
 >注意：事件发布端和订阅端的identifier一定要一致
-```java
+```
 # EventBus config
 # 开关配置，结合注解@EnableEventBus使用
 # eventbus.enabled=true
 ```
 
 - EventBus线程池（ThreadPool）策略
-  - 配置如下：
+
+① 配置如下：
 线程池配置，参考application.properties，可以不需要配置，那么采取如下默认值
-```java
+```
 # Thread Pool Config
 # Multi thread pool，是否线程隔离。如果是，那么每个不同identifier的事件都会占用一个单独线程池，否则共享一个线程池
 threadPoolMultiMode=false
@@ -284,7 +287,7 @@ public class MyApplication {
 ```
 
 运行结果
-```java
+```
 2018-06-25 13:01:02.008 INFO [main][com.nepxion.eventbus.example.service.MyPublisher:28] - 发送事件...
 2018-06-25 13:01:02.015 INFO [EventBus-192.168.0.107-thread-0][com.nepxion.eventbus.example.service.MySubscriber1:27] - 子线程接收异步事件 - Sync Event String Format，String类型
 2018-06-25 13:01:02.016 INFO [main][com.nepxion.eventbus.example.service.MySubscriber2:27] - 主线程接收同步事件 - Sync Event String Format，String类型
