@@ -15,6 +15,6 @@
 @title Nepxion EventBus
 @color 0a
 
-call mvn versions:set -DgenerateBackupPoms=false -DnewVersion=2.0.15
+call mvn versions:set -DgenerateBackupPoms=false -DnewVersion=3.0.0
 
 pause
